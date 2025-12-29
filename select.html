@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi-Epiphany | Select Your Player</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F5F0E8 0%, #E8DED0 50%, #F0E4D7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        /* Animated gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #D4B896 0%, #C9B8A8 100%);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #E8C4D4 0%, #D4A5B8 100%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+            }
+            33% { 
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% { 
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        /* Grid background */
+        .grid-background {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(201, 184, 168, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 184, 168, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            font-family: 'Allura', cursive;
+            font-size: 5rem;
+            background: linear-gradient(135deg, #9B8470 0%, #D4B896 50%, #B8956A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 12px rgba(155, 132, 112, 0.3));
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #9B8470;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Cards container */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Character card - 3D effect */
+        .character-card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 3rem 2.5rem;
+            box-shadow: 
+                0 20px 60px rgba(45, 45, 45, 0.15),
+                inset 0 1px 2px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            opacity: 0;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .character-card.hybrid {
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+        
+        .character-card.human {
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+        
+        .character-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(184, 149, 106, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            border-radius: 24px;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 30px 80px rgba(155, 132, 112, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.6);
+            border-color: rgba(184, 149, 106, 0.6);
+        }
+        
+        .character-card:hover::before {
+            opacity: 1;
+        }
+        
+        .character-card:active {
+            transform: translateY(-8px) scale(1.01);
+        }
+        
+        /* Card content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Photo container */
+        .photo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                0 15px 40px rgba(45, 45, 45, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            position: relative;
+            transition: all 0.5s;
+        }
+        
+        .character-card:hover .photo-container {
+            transform: scale(1.08);
+            box-shadow: 
+                0 20px 50px rgba(155, 132, 112, 0.4),
+                inset 0 2px 6px rgba(255, 255, 255, 0.6);
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Card title */
+        .card-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #78350f;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        /* Card subtitle */
+        .card-subtitle {
+            font-size: 1.1rem;
+            color: #92400e;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 400;
+        }
+        
+        /* Card description */
+        .card-description {
+            color: #9B8470;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 300;
+        }
+        
+        /* Stats */
+        .stats {
+            margin-top: 2rem;
+        }
+        
+        .stat {
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        
+        .stat-label {
+            color: #9B8470;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stat-icon {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+        }
+        
+        .stat-value {
+            color: #78350f;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 10px;
+            background: rgba(201, 184, 168, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #B8956A 0%, #D4B896 100%);
+            border-radius: 10px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+            box-shadow: 0 0 10px rgba(184, 149, 106, 0.5);
+        }
+        
+        .character-card:hover .progress-fill {
+            width: var(--progress) !important;
+        }
+        
+        /* Hover hint */
+        .hover-hint {
+            text-align: center;
+            color: #B8956A;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+        
+        .character-card:hover .hover-hint {
+            opacity: 1;
+        }
+        
+        /* Back link */
+        .back-link {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+        
+        .back-link a {
+            color: #9B8470;
+            text-decoration: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link a:hover {
+            color: #78350f;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .character-card {
+                padding: 2.5rem 2rem;
+            }
+            
+            .photo-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .card-title {
+                font-size: 2rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    
+    <!-- Grid background -->
+    <div class="grid-background"></div>
+    
+    <!-- Main content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="logo">Pi-Epiphany</h1>
+            <p class="subtitle">Select Your Player</p>
+        </div>
+        
+        <!-- Character cards -->
+        <div class="cards-container">
+            <!-- The Hybrid Card -->
+            <a href="hybrid.html" class="character-card hybrid">
+                <div class="card-content">
+                    <div class="photo-container">
+                        <img src="hybrid-photo.jpg" alt="The Hybrid">
+                    </div>
+                    
+                    <h2 class="card-title">The Hybrid</h2>
+                    <p class="card-subtitle">eCommerce Ops & AI Systems</p>
+                    <p class="card-description">
+                        Building systems that scale, learning automation that transforms
+                    </p>
+                    
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <span class="stat-icon">📈</span>
+                                    Amazon Ops
+                                </span>
+                                <span class="stat-value">Lvl 95</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="--progress: 95%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <span class="stat-icon">🤖</span>
+                                    Automation
+                                </span>
+                                <span class="stat-value">Lvl 75</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="--progress: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="hover-hint">Click to enter →</p>
+                </div>
+            </a>
+            
+            <!-- The Human Card -->
+            <a href="human.html" class="character-card human">
+                <div class="card-content">
+                    <div class="photo-container">
+                        <img src="human-photo.jpg" alt="The Human">
+                    </div>
+                    
+                    <h2 class="card-title">The Human</h2>
+                    <p class="card-subtitle">Epiphanies & Random Thoughts</p>
+                    <p class="card-description">
+                        Sharing experiences, opinions, tutorials, and life reflections
+                    </p>
+                    
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <span class="stat-icon">✨</span>
+                                    Curiosity
+                                </span>
+                                <span class="stat-value">MAX</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="--progress: 100%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <span class="stat-icon">💝</span>
+                                    Openness
+                                </span>
+                                <span class="stat-value">Lvl 98</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="--progress: 98%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="hover-hint">Click to enter →</p>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="index.html">← Back to entrance</a>
+        </div>
+    </div>
+
+    <script>
+        // Animate progress bars on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.character-card');
+            
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    const fills = card.querySelectorAll('.progress-fill');
+                    fills.forEach(fill => {
+                        fill.style.width = fill.style.getPropertyValue('--progress');
+                    });
+                }, 400 + (index * 200));
+            });
+        });
+    </script>
+</body>
+</html>
