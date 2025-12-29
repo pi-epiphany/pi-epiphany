@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Human | Pi-Epiphany</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F5F0E8 0%, #E8DED0 50%, #F0E4D7 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+            position: relative;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23B8956A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4V2'/%3E%3Cpath d='M15 16v-2'/%3E%3Cpath d='M8 9h2'/%3E%3Cpath d='M20 9h2'/%3E%3Cpath d='M17.8 11.8 19 13'/%3E%3Cpath d='M15 9h0'/%3E%3Cpath d='M17.8 6.2 19 5'/%3E%3Cpath d='m3 21 9-9'/%3E%3Cpath d='M12.2 6.2 11 5'/%3E%3C/svg%3E") 12 12, auto;
+        }
+        
+        /* Animated gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #E8C4D4 0%, #D4A5B8 100%);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #F4E4C1 0%, #E8D5B7 100%);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+            }
+            33% { 
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% { 
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        /* Grid background */
+        .grid-background {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(201, 184, 168, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 184, 168, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(45, 45, 45, 0.08);
+            opacity: 0;
+            animation: fadeInDown 1s ease 0.2s forwards;
+        }
+        
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .back-link {
+            color: #9B8470;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            color: #78350f;
+            background: rgba(184, 149, 106, 0.1);
+        }
+        
+        .nav-logo {
+            font-family: 'Allura', cursive;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #9B8470 0%, #D4B896 50%, #B8956A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #78350f;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 40px rgba(45, 45, 45, 0.1);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 2rem;
+            box-shadow: 0 15px 40px rgba(45, 45, 45, 0.2);
+            border: 4px solid rgba(212, 165, 184, 0.3);
+        }
+        
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: #78350f;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .hero p {
+            color: #9B8470;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .section:nth-child(3) { animation-delay: 0.6s; }
+        .section:nth-child(4) { animation-delay: 0.8s; }
+        .section:nth-child(5) { animation-delay: 1s; }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #78350f;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .blog-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(45, 45, 45, 0.08);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(155, 132, 112, 0.15);
+        }
+        
+        .blog-card::after {
+            content: '→';
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            color: #B8956A;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .blog-card:hover::after {
+            opacity: 1;
+            right: 1.2rem;
+        }
+        
+        .blog-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #78350f;
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .blog-card p {
+            color: #9B8470;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* Coming Soon Section */
+        .coming-soon {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(45, 45, 45, 0.08);
+            text-align: center;
+        }
+        
+        .coming-soon h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #78350f;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .coming-soon p {
+            color: #9B8470;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1.1rem 2.5rem;
+            background: linear-gradient(135deg, #D4A5B8 0%, #E8C4D4 50%, #D4A5B8 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            box-shadow: 
+                0 12px 35px rgba(212, 165, 184, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 16px 45px rgba(212, 165, 184, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #9B8470;
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.2s forwards;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    
+    <!-- Grid background -->
+    <div class="grid-background"></div>
+    
+    <!-- Main container -->
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="select.html" class="back-link">← Back</a>
+                <span class="nav-logo">Pi-Epiphany</span>
+            </div>
+            <h2 class="nav-title">The Human</h2>
+        </nav>
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-photo">
+                <img src="human-photo.jpg" alt="Epiphany Oliveros">
+            </div>
+            <h1>The Human Side</h1>
+            <p>Where I share experiences, reflections, and lessons learned along the way. This is the space for curiosity, conversations, and authentic learning.</p>
+        </section>
+        
+        <!-- Blog Posts Section -->
+        <section class="section">
+            <h2 class="section-title">Recent Thoughts</h2>
+            <div class="blog-grid">
+                <a href="#" class="blog-card">
+                    <div class="blog-icon">💝</div>
+                    <h3>Why eCommerce Taught Me About Life</h3>
+                    <p>Lessons in systems, resilience, and unexpected growth from managing online businesses. How running operations shaped my thinking about life itself.</p>
+                </a>
+                
+                <a href="#" class="blog-card">
+                    <div class="blog-icon">☕</div>
+                    <h3>The Coffee Shop Chronicles</h3>
+                    <p>Real conversations and observations from local cafes that changed my perspective. The small moments that spark big realizations.</p>
+                </a>
+                
+                <a href="#" class="blog-card">
+                    <div class="blog-icon">📖</div>
+                    <h3>Learning by Doing</h3>
+                    <p>My authentic journey into automation. The wins, the mistakes, and everything between. No highlight reel, just honest progress.</p>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Coming Soon Section -->
+        <section class="section">
+            <div class="coming-soon">
+                <h3>What's Coming</h3>
+                <p>Tutorials, guides, and maybe some products in the future. For now, I'm focused on sharing authentic learning and real experiences. This space will grow as I grow.</p>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <a href="mailto:epiphany.vaph@gmail.com" class="cta-button">Coffee Chat?</a>
+            <a href="mailto:epiphany.vaph@gmail.com" class="cta-button">Drop Me a Line</a>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Pi-Epiphany. Built with curiosity and coffee.</p>
+        </footer>
+    </div>
+</body>
+</html>
