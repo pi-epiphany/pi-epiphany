@@ -28,7 +28,7 @@
             position: relative;
         }
         
-        /* Animated gradient orbs - MORE VISIBLE */
+        /* Animated gradient orbs */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -98,7 +98,7 @@
             padding: 2rem;
         }
         
-        /* Logo - BIGGER and CLOSER */
+        /* Logo */
         .logo {
             font-family: 'Allura', cursive;
             font-size: 6.5rem;
@@ -123,49 +123,24 @@
             }
         }
         
-        /* Glassmorphism card */
+        /* Glassmorphism card - WHITE BACKGROUND */
         .glass-card {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.95);
             padding: 4rem 3rem;
             box-shadow: 
-                0 20px 60px rgba(45, 45, 45, 0.15),
-                inset 0 1px 2px rgba(255, 255, 255, 0.5);
+                0 20px 60px rgba(45, 45, 45, 0.12),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
             position: relative;
             overflow: hidden;
             opacity: 0;
             animation: fadeInUp 1s ease 0.6s forwards;
         }
         
-        /* Ambient light inside card */
-        .card-light {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(212, 184, 150, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse 4s ease-in-out infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { 
-                opacity: 0.5; 
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% { 
-                opacity: 0.8; 
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-        }
-        
-        /* Portal/Gateway visual - MORE VISIBLE */
-        .portal {
+        /* Siri-like animated orb */
+        .siri-orb-container {
             width: 200px;
             height: 200px;
             margin: 0 auto 3rem;
@@ -179,96 +154,133 @@
             to { opacity: 1; }
         }
         
-        .portal-ring {
+        /* Central glowing orb */
+        .siri-orb {
             position: absolute;
-            inset: 0;
+            width: 120px;
+            height: 120px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
-            border: 3px solid;
-            animation: rotate 20s linear infinite;
-        }
-        
-        .portal-ring:nth-child(1) {
-            border-color: rgba(184, 149, 106, 0.6);
-            animation-duration: 20s;
-            box-shadow: 0 0 20px rgba(184, 149, 106, 0.3);
-        }
-        
-        .portal-ring:nth-child(2) {
-            border-color: rgba(212, 165, 184, 0.5);
-            inset: 15px;
-            animation-duration: 15s;
-            animation-direction: reverse;
-            box-shadow: 0 0 15px rgba(212, 165, 184, 0.3);
-        }
-        
-        .portal-ring:nth-child(3) {
-            border-color: rgba(201, 184, 168, 0.5);
-            inset: 30px;
-            animation-duration: 25s;
-            box-shadow: 0 0 10px rgba(201, 184, 168, 0.3);
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .portal-center {
-            position: absolute;
-            inset: 50px;
-            background: radial-gradient(circle, rgba(212, 184, 150, 0.6) 0%, rgba(155, 132, 112, 0.3) 100%);
-            border-radius: 50%;
+            background: radial-gradient(circle, 
+                #FFE4A0 0%, 
+                #F4D47C 30%, 
+                #D4B896 60%, 
+                #B8956A 100%
+            );
             box-shadow: 
-                0 0 50px rgba(212, 184, 150, 0.5),
-                inset 0 0 40px rgba(255, 255, 255, 0.4);
-            animation: portalPulse 3s ease-in-out infinite;
+                0 0 40px rgba(255, 228, 160, 0.8),
+                0 0 80px rgba(244, 212, 124, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: orbPulse 2s ease-in-out infinite;
         }
         
-        @keyframes portalPulse {
+        @keyframes orbPulse {
             0%, 100% { 
-                transform: scale(1);
+                transform: translate(-50%, -50%) scale(1);
                 box-shadow: 
-                    0 0 50px rgba(212, 184, 150, 0.5),
-                    inset 0 0 40px rgba(255, 255, 255, 0.4);
+                    0 0 40px rgba(255, 228, 160, 0.8),
+                    0 0 80px rgba(244, 212, 124, 0.6),
+                    inset 0 0 30px rgba(255, 255, 255, 0.5);
             }
             50% { 
-                transform: scale(1.15);
+                transform: translate(-50%, -50%) scale(1.08);
                 box-shadow: 
-                    0 0 70px rgba(212, 184, 150, 0.7),
-                    inset 0 0 50px rgba(255, 255, 255, 0.6);
+                    0 0 60px rgba(255, 228, 160, 1),
+                    0 0 100px rgba(244, 212, 124, 0.8),
+                    inset 0 0 40px rgba(255, 255, 255, 0.7);
             }
         }
         
-        /* Floating particles - MORE VISIBLE */
-        .particle {
+        /* Shimmer effect */
+        .siri-orb::before {
+            content: '';
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: rgba(184, 149, 106, 0.8);
+            inset: -10px;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.6) 50%, 
+                transparent 70%
+            );
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(184, 149, 106, 0.5);
-            animation: particleFloat 15s ease-in-out infinite;
+            animation: shimmer 3s linear infinite;
         }
         
-        @keyframes particleFloat {
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { transform: rotate(360deg); opacity: 0.3; }
+        }
+        
+        /* Pulsing waves (like Siri activation) */
+        .siri-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 3px solid;
+            animation: waveExpand 3s ease-out infinite;
+            opacity: 0;
+        }
+        
+        .siri-wave:nth-child(1) {
+            border-color: rgba(255, 228, 160, 0.6);
+            animation-delay: 0s;
+        }
+        
+        .siri-wave:nth-child(2) {
+            border-color: rgba(244, 212, 124, 0.5);
+            animation-delay: 1s;
+        }
+        
+        .siri-wave:nth-child(3) {
+            border-color: rgba(212, 184, 150, 0.4);
+            animation-delay: 2s;
+        }
+        
+        @keyframes waveExpand {
+            0% {
+                width: 120px;
+                height: 120px;
+                opacity: 0.8;
+            }
+            100% {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+        
+        /* Floating sparkles around orb */
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #FFF9E6 0%, #FFE4A0 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 228, 160, 0.8);
+            animation: sparkleFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes sparkleFloat {
             0%, 100% { 
-                transform: translate(0, 0);
+                transform: translate(0, 0) scale(1);
                 opacity: 0;
             }
             10%, 90% {
                 opacity: 1;
             }
             50% { 
-                transform: translate(var(--x), var(--y));
+                transform: translate(var(--x), var(--y)) scale(1.3);
             }
         }
         
-        .particle:nth-child(1) { top: 20%; left: 15%; --x: 30px; --y: -40px; animation-delay: 0s; }
-        .particle:nth-child(2) { top: 40%; left: 80%; --x: -25px; --y: 35px; animation-delay: 2s; }
-        .particle:nth-child(3) { top: 60%; left: 20%; --x: 40px; --y: 30px; animation-delay: 4s; }
-        .particle:nth-child(4) { top: 80%; left: 70%; --x: -30px; --y: -35px; animation-delay: 6s; }
-        .particle:nth-child(5) { top: 30%; left: 50%; --x: 35px; --y: 40px; animation-delay: 1s; }
-        .particle:nth-child(6) { top: 70%; left: 40%; --x: -40px; --y: -30px; animation-delay: 3s; }
+        .sparkle:nth-child(4) { top: 20%; left: 30%; --x: -15px; --y: -20px; animation-delay: 0s; }
+        .sparkle:nth-child(5) { top: 30%; right: 25%; --x: 20px; --y: -15px; animation-delay: 1s; }
+        .sparkle:nth-child(6) { bottom: 25%; left: 25%; --x: -18px; --y: 18px; animation-delay: 2s; }
+        .sparkle:nth-child(7) { bottom: 30%; right: 30%; --x: 15px; --y: 20px; animation-delay: 3s; }
         
         /* Welcome text */
         .welcome-text {
@@ -312,7 +324,7 @@
             51%, 100% { opacity: 0; }
         }
         
-        /* Premium button - NO ARROW */
+        /* Premium button */
         .enter-button {
             display: inline-block;
             padding: 1.1rem 2.5rem;
@@ -360,6 +372,24 @@
             transform: translateY(-1px);
         }
         
+        /* Light rays */
+        .light-rays {
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(ellipse at center, rgba(255, 228, 160, 0.15) 0%, transparent 60%);
+            animation: rotateRays 60s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes rotateRays {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .logo {
@@ -371,9 +401,39 @@
                 padding: 3rem 2rem;
             }
             
-            .portal {
+            .siri-orb-container {
                 width: 150px;
                 height: 150px;
+            }
+            
+            .siri-orb {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .siri-wave:nth-child(1) {
+                animation: waveExpandMobile 3s ease-out infinite;
+            }
+            
+            .siri-wave:nth-child(2) {
+                animation: waveExpandMobile 3s ease-out infinite;
+            }
+            
+            .siri-wave:nth-child(3) {
+                animation: waveExpandMobile 3s ease-out infinite;
+            }
+            
+            @keyframes waveExpandMobile {
+                0% {
+                    width: 100px;
+                    height: 100px;
+                    opacity: 0.8;
+                }
+                100% {
+                    width: 150px;
+                    height: 150px;
+                    opacity: 0;
+                }
             }
             
             .welcome-text {
@@ -391,7 +451,7 @@
     </style>
 </head>
 <body>
-    <!-- Animated gradient orbs - MORE VISIBLE -->
+    <!-- Animated gradient orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -399,26 +459,29 @@
     <!-- Grid background -->
     <div class="grid-background"></div>
     
+    <!-- Light rays -->
+    <div class="light-rays"></div>
+    
     <!-- Main content -->
     <div class="welcome-container">
         <h1 class="logo">Pi-Epiphany</h1>
         
         <div class="glass-card">
-            <!-- Ambient card light -->
-            <div class="card-light"></div>
-            
-            <!-- Modern portal - MORE VISIBLE -->
-            <div class="portal">
-                <div class="portal-ring"></div>
-                <div class="portal-ring"></div>
-                <div class="portal-ring"></div>
-                <div class="portal-center"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
+            <!-- Siri-like animated orb -->
+            <div class="siri-orb-container">
+                <!-- Expanding waves -->
+                <div class="siri-wave"></div>
+                <div class="siri-wave"></div>
+                <div class="siri-wave"></div>
+                
+                <!-- Central glowing orb -->
+                <div class="siri-orb"></div>
+                
+                <!-- Floating sparkles -->
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
             </div>
             
             <p class="welcome-text">Welcome to my digital home.</p>
