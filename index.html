@@ -139,7 +139,7 @@
             animation: fadeInUp 1s ease 0.6s forwards;
         }
         
-        /* Siri-like animated orb */
+        /* Siri-like animated orb - SOFTER COLORS */
         .siri-orb-container {
             width: 200px;
             height: 200px;
@@ -154,7 +154,7 @@
             to { opacity: 1; }
         }
         
-        /* Central glowing orb */
+        /* Central glowing orb - SOFTER CHAMPAGNE TONES */
         .siri-orb {
             position: absolute;
             width: 120px;
@@ -164,15 +164,15 @@
             transform: translate(-50%, -50%);
             border-radius: 50%;
             background: radial-gradient(circle, 
-                #FFE4A0 0%, 
-                #F4D47C 30%, 
-                #D4B896 60%, 
-                #B8956A 100%
+                #F4E4C1 0%, 
+                #E8D5B7 30%, 
+                #D4C4B0 60%, 
+                #C9B8A8 100%
             );
             box-shadow: 
-                0 0 40px rgba(255, 228, 160, 0.8),
-                0 0 80px rgba(244, 212, 124, 0.6),
-                inset 0 0 30px rgba(255, 255, 255, 0.5);
+                0 0 30px rgba(244, 228, 193, 0.4),
+                0 0 50px rgba(232, 213, 183, 0.3),
+                inset 0 0 25px rgba(255, 255, 255, 0.4);
             animation: orbPulse 2s ease-in-out infinite;
         }
         
@@ -180,27 +180,27 @@
             0%, 100% { 
                 transform: translate(-50%, -50%) scale(1);
                 box-shadow: 
-                    0 0 40px rgba(255, 228, 160, 0.8),
-                    0 0 80px rgba(244, 212, 124, 0.6),
-                    inset 0 0 30px rgba(255, 255, 255, 0.5);
+                    0 0 30px rgba(244, 228, 193, 0.4),
+                    0 0 50px rgba(232, 213, 183, 0.3),
+                    inset 0 0 25px rgba(255, 255, 255, 0.4);
             }
             50% { 
                 transform: translate(-50%, -50%) scale(1.08);
                 box-shadow: 
-                    0 0 60px rgba(255, 228, 160, 1),
-                    0 0 100px rgba(244, 212, 124, 0.8),
-                    inset 0 0 40px rgba(255, 255, 255, 0.7);
+                    0 0 40px rgba(244, 228, 193, 0.5),
+                    0 0 60px rgba(232, 213, 183, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.5);
             }
         }
         
-        /* Shimmer effect */
+        /* Shimmer effect - SOFTER */
         .siri-orb::before {
             content: '';
             position: absolute;
             inset: -10px;
             background: linear-gradient(45deg, 
                 transparent 30%, 
-                rgba(255, 255, 255, 0.6) 50%, 
+                rgba(255, 255, 255, 0.4) 50%, 
                 transparent 70%
             );
             border-radius: 50%;
@@ -208,35 +208,35 @@
         }
         
         @keyframes shimmer {
-            0% { transform: rotate(0deg); opacity: 0.3; }
-            50% { opacity: 0.8; }
-            100% { transform: rotate(360deg); opacity: 0.3; }
+            0% { transform: rotate(0deg); opacity: 0.2; }
+            50% { opacity: 0.5; }
+            100% { transform: rotate(360deg); opacity: 0.2; }
         }
         
-        /* Pulsing waves (like Siri activation) */
+        /* Pulsing waves - SOFTER TONES */
         .siri-wave {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             border-radius: 50%;
-            border: 3px solid;
+            border: 2px solid;
             animation: waveExpand 3s ease-out infinite;
             opacity: 0;
         }
         
         .siri-wave:nth-child(1) {
-            border-color: rgba(255, 228, 160, 0.6);
+            border-color: rgba(244, 228, 193, 0.4);
             animation-delay: 0s;
         }
         
         .siri-wave:nth-child(2) {
-            border-color: rgba(244, 212, 124, 0.5);
+            border-color: rgba(232, 213, 183, 0.35);
             animation-delay: 1s;
         }
         
         .siri-wave:nth-child(3) {
-            border-color: rgba(212, 184, 150, 0.4);
+            border-color: rgba(212, 196, 176, 0.3);
             animation-delay: 2s;
         }
         
@@ -244,7 +244,7 @@
             0% {
                 width: 120px;
                 height: 120px;
-                opacity: 0.8;
+                opacity: 0.6;
             }
             100% {
                 width: 200px;
@@ -253,14 +253,14 @@
             }
         }
         
-        /* Floating sparkles around orb */
+        /* Floating sparkles - SOFTER GLOW */
         .sparkle {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: radial-gradient(circle, #FFF9E6 0%, #FFE4A0 100%);
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #F4E4C1 0%, #E8D5B7 100%);
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(255, 228, 160, 0.8);
+            box-shadow: 0 0 10px rgba(244, 228, 193, 0.5);
             animation: sparkleFloat 4s ease-in-out infinite;
         }
         
@@ -270,10 +270,10 @@
                 opacity: 0;
             }
             10%, 90% {
-                opacity: 1;
+                opacity: 0.7;
             }
             50% { 
-                transform: translate(var(--x), var(--y)) scale(1.3);
+                transform: translate(var(--x), var(--y)) scale(1.2);
             }
         }
         
@@ -288,233 +288,3 @@
             color: #9B8470;
             margin-bottom: 2rem;
             font-weight: 400;
-            letter-spacing: 0.3px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 1.2s forwards;
-        }
-        
-        /* Typing text */
-        .typing-container {
-            min-height: 80px;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .typing-text {
-            font-family: 'Allura', cursive;
-            font-size: 2rem;
-            color: #B8956A;
-            line-height: 1.6;
-            display: inline;
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 2rem;
-            background: #B8956A;
-            margin-left: 3px;
-            animation: blink 0.7s infinite;
-            vertical-align: bottom;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        /* Premium button */
-        .enter-button {
-            display: inline-block;
-            padding: 1.1rem 2.5rem;
-            background: linear-gradient(135deg, #9B8470 0%, #B8956A 50%, #A08060 100%);
-            color: #FAF8F3;
-            text-decoration: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            box-shadow: 
-                0 12px 35px rgba(155, 132, 112, 0.4),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 3.5s forwards;
-            position: relative;
-            z-index: 2;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-        }
-        
-        .enter-button::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
-            border-radius: 12px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .enter-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                0 16px 45px rgba(155, 132, 112, 0.6),
-                inset 0 2px 4px rgba(255, 255, 255, 0.4);
-        }
-        
-        .enter-button:hover::before {
-            opacity: 1;
-        }
-        
-        .enter-button:active {
-            transform: translateY(-1px);
-        }
-        
-        /* Light rays */
-        .light-rays {
-            position: fixed;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(ellipse at center, rgba(255, 228, 160, 0.15) 0%, transparent 60%);
-            animation: rotateRays 60s linear infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        @keyframes rotateRays {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 4rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .glass-card {
-                padding: 3rem 2rem;
-            }
-            
-            .siri-orb-container {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .siri-orb {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .siri-wave:nth-child(1) {
-                animation: waveExpandMobile 3s ease-out infinite;
-            }
-            
-            .siri-wave:nth-child(2) {
-                animation: waveExpandMobile 3s ease-out infinite;
-            }
-            
-            .siri-wave:nth-child(3) {
-                animation: waveExpandMobile 3s ease-out infinite;
-            }
-            
-            @keyframes waveExpandMobile {
-                0% {
-                    width: 100px;
-                    height: 100px;
-                    opacity: 0.8;
-                }
-                100% {
-                    width: 150px;
-                    height: 150px;
-                    opacity: 0;
-                }
-            }
-            
-            .welcome-text {
-                font-size: 1.2rem;
-            }
-            
-            .typing-text {
-                font-size: 1.6rem;
-            }
-            
-            .orb {
-                filter: blur(50px);
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Animated gradient orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    
-    <!-- Grid background -->
-    <div class="grid-background"></div>
-    
-    <!-- Light rays -->
-    <div class="light-rays"></div>
-    
-    <!-- Main content -->
-    <div class="welcome-container">
-        <h1 class="logo">Pi-Epiphany</h1>
-        
-        <div class="glass-card">
-            <!-- Siri-like animated orb -->
-            <div class="siri-orb-container">
-                <!-- Expanding waves -->
-                <div class="siri-wave"></div>
-                <div class="siri-wave"></div>
-                <div class="siri-wave"></div>
-                
-                <!-- Central glowing orb -->
-                <div class="siri-orb"></div>
-                
-                <!-- Floating sparkles -->
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-            </div>
-            
-            <p class="welcome-text">Welcome to my digital home.</p>
-            
-            <div class="typing-container">
-                <span class="typing-text" id="typingText"></span>
-                <span class="cursor" id="cursor"></span>
-            </div>
-            
-            <a href="select.html" class="enter-button">Step Inside</a>
-        </div>
-    </div>
-
-    <script>
-        // Typing animation
-        const text = "Where systems meet stories, and curiosity leads the way.";
-        const typingElement = document.getElementById('typingText');
-        const cursor = document.getElementById('cursor');
-        let index = 0;
-        
-        function type() {
-            if (index < text.length) {
-                typingElement.textContent += text[index];
-                index++;
-                setTimeout(type, 80);
-            } else {
-                setTimeout(() => {
-                    cursor.style.display = 'none';
-                }, 500);
-            }
-        }
-        
-        setTimeout(type, 1500);
-    </script>
-</body>
-</html>
