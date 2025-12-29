@@ -19,7 +19,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #FAF8F3 0%, #E8DED0 100%);
+            background: linear-gradient(135deg, #F5F0E8 0%, #E8DED0 50%, #F0E4D7 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -28,7 +28,7 @@
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23B8956A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4V2'/%3E%3Cpath d='M15 16v-2'/%3E%3Cpath d='M8 9h2'/%3E%3Cpath d='M20 9h2'/%3E%3Cpath d='M17.8 11.8 19 13'/%3E%3Cpath d='M15 9h0'/%3E%3Cpath d='M17.8 6.2 19 5'/%3E%3Cpath d='m3 21 9-9'/%3E%3Cpath d='M12.2 6.2 11 5'/%3E%3C/svg%3E") 12 12, auto;
         }
         
-        /* Floating particles */
+        /* Floating petals */
         .particles {
             position: fixed;
             width: 100%;
@@ -39,22 +39,23 @@
         
         .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(184, 149, 106, 0.4);
-            border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(ellipse, #E8C4D4 0%, #D4A5B8 100%);
+            border-radius: 50% 0 50% 0;
+            animation: float 25s ease-in-out infinite;
+            opacity: 0;
         }
         
         @keyframes float {
             0%, 100% { 
-                transform: translateY(0) translateX(0); 
+                transform: translateY(0) translateX(0) rotate(0deg); 
                 opacity: 0;
             }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
             100% { 
-                transform: translateY(-100vh) translateX(50px); 
+                transform: translateY(-100vh) translateX(100px) rotate(360deg); 
                 opacity: 0;
             }
         }
@@ -64,17 +65,21 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            max-width: 900px;
+            max-width: 1100px;
             padding: 2rem;
         }
         
-        /* Logo */
+        /* Logo - warm gold color */
         .logo {
             font-family: 'Allura', cursive;
             font-size: 5rem;
-            color: #2D2D2D;
+            background: linear-gradient(135deg, #B8956A 0%, #D4B896 50%, #B8956A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 3rem;
             animation: fadeIn 1s ease;
+            text-shadow: 0 2px 10px rgba(184, 149, 106, 0.3);
         }
         
         @keyframes fadeIn {
@@ -82,33 +87,134 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Sophisticated magical door */
-        .door-container {
-            width: 240px;
-            height: 360px;
+        /* Cottage facade container */
+        .cottage-container {
+            width: 700px;
+            height: 400px;
             margin: 0 auto 3rem;
             position: relative;
-            perspective: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
         }
         
-        .door-wrapper {
-            width: 100%;
-            height: 100%;
+        /* Windows on sides */
+        .window {
+            width: 180px;
+            height: 240px;
+            background: linear-gradient(135deg, #E8DED0 0%, #D4C4B0 100%);
+            border-radius: 8px 8px 0 0;
             position: relative;
-            transform-style: preserve-3d;
+            box-shadow: 
+                0 10px 30px rgba(45, 45, 45, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            border: 3px solid #C9B8A8;
+            animation: gentleGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes gentleGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(45, 45, 45, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 10px 40px rgba(228, 196, 212, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.4); }
+        }
+        
+        /* Window panes */
+        .window-panes {
+            position: absolute;
+            inset: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .pane {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(232, 222, 208, 0.6) 100%);
+            border: 1px solid rgba(201, 184, 168, 0.4);
+            border-radius: 4px;
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Curtains */
+        .curtain {
+            position: absolute;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(228, 196, 212, 0.3) 50%, transparent 100%);
+            top: 0;
+            animation: curtainSway 6s ease-in-out infinite;
+        }
+        
+        .curtain.left {
+            left: 0;
+            transform-origin: top left;
+        }
+        
+        .curtain.right {
+            right: 0;
+            transform-origin: top right;
+        }
+        
+        @keyframes curtainSway {
+            0%, 100% { transform: scaleX(1); opacity: 0.6; }
+            50% { transform: scaleX(0.95); opacity: 0.8; }
+        }
+        
+        /* Flower boxes under windows */
+        .flower-box {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 30px;
+            background: linear-gradient(135deg, #A08060 0%, #8B6F47 100%);
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(45, 45, 45, 0.3);
+        }
+        
+        .flower {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #E8C4D4 0%, #D4A5B8 100%);
+            border-radius: 50%;
+            bottom: 8px;
+            animation: flowerSway 3s ease-in-out infinite;
+        }
+        
+        @keyframes flowerSway {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-3px) scale(1.1); }
+        }
+        
+        .flower:nth-child(1) { left: 15%; animation-delay: 0s; }
+        .flower:nth-child(2) { left: 30%; animation-delay: 0.3s; background: radial-gradient(circle, #F0D4E0 0%, #E8C4D4 100%); }
+        .flower:nth-child(3) { left: 45%; animation-delay: 0.6s; }
+        .flower:nth-child(4) { left: 60%; animation-delay: 0.9s; background: radial-gradient(circle, #E8C4D4 0%, #D4A5B8 100%); }
+        .flower:nth-child(5) { left: 75%; animation-delay: 1.2s; }
+        
+        /* Magical door in center */
+        .door-container {
+            width: 220px;
+            height: 320px;
+            position: relative;
+            z-index: 2;
         }
         
         .door {
             width: 100%;
             height: 100%;
-            background: linear-gradient(165deg, #D4C4B0 0%, #B8956A 50%, #A08060 100%);
-            border-radius: 15px 15px 8px 8px;
+            background: linear-gradient(165deg, #D4C4B0 0%, #B8956A 40%, #A08060 100%);
+            border-radius: 12px 12px 0 0;
             position: relative;
             box-shadow: 
                 0 20px 60px rgba(45, 45, 45, 0.4),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+                inset 0 3px 6px rgba(255, 255, 255, 0.3),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.2),
+                0 0 40px rgba(228, 196, 212, 0.4);
             animation: doorGlow 4s ease-in-out infinite;
+            border: 4px solid #C9B8A8;
             overflow: hidden;
         }
         
@@ -116,75 +222,93 @@
             0%, 100% { 
                 box-shadow: 
                     0 20px 60px rgba(45, 45, 45, 0.4),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.3),
-                    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-                    0 0 30px rgba(184, 149, 106, 0.3);
+                    inset 0 3px 6px rgba(255, 255, 255, 0.3),
+                    inset 0 -3px 6px rgba(0, 0, 0, 0.2),
+                    0 0 40px rgba(228, 196, 212, 0.4);
             }
             50% { 
                 box-shadow: 
-                    0 25px 70px rgba(184, 149, 106, 0.5),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-                    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-                    0 0 50px rgba(184, 149, 106, 0.6);
+                    0 25px 70px rgba(228, 196, 212, 0.5),
+                    inset 0 4px 8px rgba(255, 255, 255, 0.4),
+                    inset 0 -4px 8px rgba(0, 0, 0, 0.2),
+                    0 0 60px rgba(228, 196, 212, 0.6);
             }
         }
         
-        /* Ornate door panels */
+        /* Ornate door arch */
+        .door-arch {
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            height: 350px;
+            border: 4px solid rgba(228, 196, 212, 0.3);
+            border-radius: 120px 120px 0 0;
+            box-shadow: 
+                inset 0 0 40px rgba(228, 196, 212, 0.2),
+                0 0 40px rgba(228, 196, 212, 0.2);
+        }
+        
+        /* Door panels */
         .door-panel {
             position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 6px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
         }
         
         .door-panel.top {
-            top: 30px;
-            left: 30px;
-            right: 30px;
-            height: 120px;
+            top: 25px;
+            left: 25px;
+            right: 25px;
+            height: 110px;
         }
         
         .door-panel.bottom {
-            bottom: 30px;
-            left: 30px;
-            right: 30px;
-            height: 120px;
+            bottom: 25px;
+            left: 25px;
+            right: 25px;
+            height: 110px;
         }
         
-        /* Magical ornate details */
-        .door-ornament {
+        /* Magical center ornament */
+        .door-center {
             position: absolute;
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(184, 149, 106, 0.5);
-            animation: rotate 20s linear infinite;
+            background: radial-gradient(circle, rgba(240, 212, 224, 0.4) 0%, transparent 70%);
+            box-shadow: 
+                0 0 30px rgba(228, 196, 212, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: centerPulse 3s ease-in-out infinite;
         }
         
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+        @keyframes centerPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
         }
         
-        .door-ornament::before,
-        .door-ornament::after {
+        .door-center::before,
+        .door-center::after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(228, 196, 212, 0.4);
+            border-radius: 2px;
         }
         
-        .door-ornament::before {
-            width: 2px;
+        .door-center::before {
+            width: 3px;
             height: 100%;
             left: 50%;
             transform: translateX(-50%);
         }
         
-        .door-ornament::after {
-            height: 2px;
+        .door-center::after {
+            height: 3px;
             width: 100%;
             top: 50%;
             transform: translateY(-50%);
@@ -192,73 +316,65 @@
         
         /* Elegant door knob */
         .door-knob {
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, #F4E4C1 0%, #B8956A 100%);
+            width: 22px;
+            height: 22px;
+            background: radial-gradient(circle, #F4E4C1 0%, #D4B896 50%, #B8956A 100%);
             border-radius: 50%;
             position: absolute;
-            right: 30px;
+            right: 25px;
             top: 50%;
             transform: translateY(-50%);
             box-shadow: 
-                0 4px 12px rgba(0,0,0,0.4),
-                inset 0 2px 4px rgba(255,255,255,0.5);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+                0 4px 15px rgba(0,0,0,0.4),
+                inset 0 2px 4px rgba(255,255,255,0.6),
+                0 0 10px rgba(228, 196, 212, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.4);
         }
         
-        /* Door arch/frame */
-        .door-arch {
+        /* Climbing vines */
+        .vine {
             position: absolute;
-            top: -25px;
-            left: -25px;
-            right: -25px;
-            bottom: -25px;
-            border: 3px solid rgba(184, 149, 106, 0.3);
-            border-radius: 20px 20px 12px 12px;
-            box-shadow: 
-                inset 0 0 30px rgba(184, 149, 106, 0.2),
-                0 0 30px rgba(184, 149, 106, 0.1);
+            width: 4px;
+            background: linear-gradient(180deg, transparent 0%, #8B9B7E 50%, transparent 100%);
+            opacity: 0.6;
         }
         
-        /* Mystical light effect */
-        .door-light {
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            top: -25%;
-            left: -25%;
-            background: radial-gradient(ellipse at center, rgba(184, 149, 106, 0.3) 0%, transparent 50%);
-            animation: pulse 3s ease-in-out infinite;
-            pointer-events: none;
+        .vine.left {
+            height: 200px;
+            left: -20px;
+            top: 50px;
+            transform: rotate(-15deg);
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
+        .vine.right {
+            height: 200px;
+            right: -20px;
+            top: 50px;
+            transform: rotate(15deg);
         }
         
-        /* Sparkles around door */
+        /* Sparkles */
         .sparkle {
             position: absolute;
             width: 4px;
             height: 4px;
-            background: #F4E4C1;
+            background: #F0D4E0;
             border-radius: 50%;
-            box-shadow: 0 0 10px #B8956A;
-            animation: sparkle 2s ease-in-out infinite;
+            box-shadow: 0 0 10px #E8C4D4;
+            animation: sparkle 2.5s ease-in-out infinite;
         }
         
         @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
         }
         
-        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
-        .sparkle:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 1s; }
-        .sparkle:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1.5s; }
+        .sparkle:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 15%; right: 10%; animation-delay: 0.7s; }
+        .sparkle:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 1.4s; }
+        .sparkle:nth-child(4) { bottom: 10%; right: 5%; animation-delay: 2.1s; }
         
-        /* Welcome text - more elegant */
+        /* Welcome text */
         .welcome-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
@@ -269,7 +385,7 @@
             animation: fadeIn 1.5s ease;
         }
         
-        /* Typing text - one line */
+        /* Typing text */
         .typing-container {
             min-height: 80px;
             margin-bottom: 3rem;
@@ -298,20 +414,20 @@
             51%, 100% { opacity: 0; }
         }
         
-        /* Enter button - 3D effect */
+        /* Enter button */
         .enter-button {
             display: inline-block;
             padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #C9B8A8 0%, #B8956A 100%);
-            color: #FAF8F3;
+            background: linear-gradient(135deg, #D4A5B8 0%, #E8C4D4 50%, #D4A5B8 100%);
+            color: white;
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.2rem;
             font-weight: 500;
             box-shadow: 
-                0 10px 30px rgba(184, 149, 106, 0.4),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3),
-                inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+                0 10px 30px rgba(212, 165, 184, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             opacity: 0;
             animation: fadeInButton 0.5s ease 3.5s forwards;
@@ -319,7 +435,6 @@
             overflow: hidden;
             cursor: pointer;
             border: none;
-            transform-style: preserve-3d;
         }
         
         @keyframes fadeInButton {
@@ -333,16 +448,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
             transition: left 0.5s;
         }
         
         .enter-button:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 
-                0 15px 40px rgba(184, 149, 106, 0.6),
-                inset 0 2px 4px rgba(255, 255, 255, 0.4),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+                0 15px 40px rgba(212, 165, 184, 0.6),
+                inset 0 2px 6px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 6px rgba(0, 0, 0, 0.2);
         }
         
         .enter-button:hover::before {
@@ -351,20 +466,16 @@
         
         .enter-button:active {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 
-                0 8px 25px rgba(184, 149, 106, 0.5),
-                inset 0 1px 2px rgba(255, 255, 255, 0.2),
-                inset 0 -1px 2px rgba(0, 0, 0, 0.3);
         }
         
-        /* Light rays effect */
+        /* Light rays */
         .light-rays {
             position: fixed;
             width: 200%;
             height: 200%;
             top: -50%;
             left: -50%;
-            background: radial-gradient(ellipse at center, rgba(184, 149, 106, 0.1) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(228, 196, 212, 0.15) 0%, transparent 60%);
             animation: rotateRays 60s linear infinite;
             pointer-events: none;
             z-index: 1;
@@ -376,7 +487,24 @@
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .cottage-container {
+                width: 100%;
+                height: auto;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .window {
+                width: 140px;
+                height: 200px;
+            }
+            
+            .door-container {
+                width: 180px;
+                height: 270px;
+            }
+            
             .logo {
                 font-size: 3.5rem;
             }
@@ -388,21 +516,22 @@
             .typing-text {
                 font-size: 1.6rem;
             }
-            
-            .door-container {
-                width: 180px;
-                height: 270px;
+        }
+        
+        @media (max-width: 768px) {
+            .cottage-container {
+                flex-direction: row;
+                flex-wrap: wrap;
             }
             
-            .enter-button {
-                padding: 1rem 2rem;
-                font-size: 1rem;
+            .window {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Particles -->
+    <!-- Floating petals -->
     <div class="particles" id="particles"></div>
     
     <!-- Light rays -->
@@ -412,20 +541,61 @@
     <div class="welcome-container">
         <h1 class="logo">Pi-Epiphany</h1>
         
-        <div class="door-container">
-            <div class="door-light"></div>
-            <div class="door-arch"></div>
-            <div class="door-wrapper">
+        <!-- Cottage facade with windows and door -->
+        <div class="cottage-container">
+            <!-- Left Window -->
+            <div class="window">
+                <div class="window-panes">
+                    <div class="pane"></div>
+                    <div class="pane"></div>
+                    <div class="pane"></div>
+                    <div class="pane"></div>
+                </div>
+                <div class="curtain left"></div>
+                <div class="curtain right"></div>
+                <div class="flower-box">
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                </div>
+            </div>
+            
+            <!-- Magical Door -->
+            <div class="door-container">
+                <div class="door-arch"></div>
+                <div class="vine left"></div>
+                <div class="vine right"></div>
                 <div class="door">
                     <div class="door-panel top"></div>
                     <div class="door-panel bottom"></div>
-                    <div class="door-ornament"></div>
+                    <div class="door-center"></div>
                     <div class="door-knob"></div>
                 </div>
                 <div class="sparkle"></div>
                 <div class="sparkle"></div>
                 <div class="sparkle"></div>
                 <div class="sparkle"></div>
+            </div>
+            
+            <!-- Right Window -->
+            <div class="window">
+                <div class="window-panes">
+                    <div class="pane"></div>
+                    <div class="pane"></div>
+                    <div class="pane"></div>
+                    <div class="pane"></div>
+                </div>
+                <div class="curtain left"></div>
+                <div class="curtain right"></div>
+                <div class="flower-box">
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                    <div class="flower"></div>
+                </div>
             </div>
         </div>
         
@@ -440,18 +610,18 @@
     </div>
 
     <script>
-        // Generate floating particles
+        // Generate floating petals
         const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 25; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particle.style.animationDelay = Math.random() * 25 + 's';
+            particle.style.animationDuration = (20 + Math.random() * 15) + 's';
             particlesContainer.appendChild(particle);
         }
         
-        // Typing animation - ONE LINE
+        // Typing animation
         const text = "Where systems meet stories, and curiosity leads the way.";
         const typingElement = document.getElementById('typingText');
         const cursor = document.getElementById('cursor');
@@ -461,16 +631,14 @@
             if (index < text.length) {
                 typingElement.textContent += text[index];
                 index++;
-                setTimeout(type, 80); // Medium speed
+                setTimeout(type, 80);
             } else {
-                // Remove cursor after typing is done
                 setTimeout(() => {
                     cursor.style.display = 'none';
                 }, 500);
             }
         }
         
-        // Start typing after a brief delay
         setTimeout(type, 1000);
     </script>
 </body>
