@@ -19,74 +19,14 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #F5F0E8 0%, #E8DED0 50%, #F0E4D7 100%);
+            background: #FFFFFF;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             position: relative;
-        }
-        
-        /* Animated gradient orbs */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.6;
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-        }
-        
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #D4B896 0%, #C9B8A8 100%);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-        
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #E8C4D4 0%, #D4A5B8 100%);
-            bottom: -150px;
-            right: -150px;
-            animation-delay: 3s;
-        }
-        
-        .orb-3 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, #B8956A 0%, #A08060 100%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: 6s;
-        }
-        
-        @keyframes float {
-            0%, 100% { 
-                transform: translate(0, 0) scale(1);
-            }
-            33% { 
-                transform: translate(30px, -30px) scale(1.1);
-            }
-            66% { 
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-        }
-        
-        /* Grid background */
-        .grid-background {
-            position: fixed;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(201, 184, 168, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(201, 184, 168, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23B8956A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4V2'/%3E%3Cpath d='M15 16v-2'/%3E%3Cpath d='M8 9h2'/%3E%3Cpath d='M20 9h2'/%3E%3Cpath d='M17.8 11.8 19 13'/%3E%3Cpath d='M15 9h0'/%3E%3Cpath d='M17.8 6.2 19 5'/%3E%3Cpath d='m3 21 9-9'/%3E%3Cpath d='M12.2 6.2 11 5'/%3E%3C/svg%3E") 12 12, auto;
         }
         
         /* Main container */
@@ -98,7 +38,7 @@
             padding: 2rem;
         }
         
-        /* Logo */
+        /* Logo - Keep Allura */
         .logo {
             font-family: 'Allura', cursive;
             font-size: 6.5rem;
@@ -123,15 +63,15 @@
             }
         }
         
-        /* Glassmorphism card */
+        /* Clean white card */
         .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(201, 184, 168, 0.2);
             padding: 5rem 3rem;
             box-shadow: 
-                0 20px 60px rgba(45, 45, 45, 0.12),
+                0 20px 60px rgba(45, 45, 45, 0.08),
                 inset 0 1px 2px rgba(255, 255, 255, 0.8);
             position: relative;
             overflow: hidden;
@@ -139,7 +79,7 @@
             animation: fadeInUp 1s ease 0.6s forwards;
         }
         
-        /* Gold glitter particles */
+        /* Diamond glitter particles */
         .glitter-container {
             position: absolute;
             inset: 0;
@@ -147,59 +87,57 @@
             overflow: hidden;
         }
         
-        .glitter {
+        .diamond {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #F4E4C1 0%, #D4B896 100%);
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(244, 228, 193, 0.8);
-            animation: glitterFloat 8s ease-in-out infinite;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #F4E4C1 0%, #D4B896 100%);
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px rgba(244, 228, 193, 0.8);
+            animation: diamondFloat 8s ease-in-out infinite;
             opacity: 0;
         }
         
-        @keyframes glitterFloat {
+        @keyframes diamondFloat {
             0%, 100% {
-                transform: translate(0, 0) scale(0);
+                transform: translate(0, 0) rotate(45deg) scale(0);
                 opacity: 0;
             }
             10% {
                 opacity: 1;
-                transform: translate(var(--x1), var(--y1)) scale(1);
+                transform: translate(var(--x1), var(--y1)) rotate(135deg) scale(1);
             }
             50% {
-                opacity: 0.8;
-                transform: translate(var(--x2), var(--y2)) scale(1.3);
+                opacity: 0.9;
+                transform: translate(var(--x2), var(--y2)) rotate(225deg) scale(1.3);
             }
             90% {
                 opacity: 1;
-                transform: translate(var(--x3), var(--y3)) scale(1);
+                transform: translate(var(--x3), var(--y3)) rotate(315deg) scale(1);
             }
             100% {
-                transform: translate(var(--x4), var(--y4)) scale(0);
+                transform: translate(var(--x4), var(--y4)) rotate(405deg) scale(0);
                 opacity: 0;
             }
         }
         
-        /* Generate random glitter positions */
-        .glitter:nth-child(1) { left: 15%; top: 20%; --x1: 10px; --y1: -15px; --x2: -8px; --y2: 20px; --x3: 12px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 0s; }
-        .glitter:nth-child(2) { left: 25%; top: 35%; --x1: -12px; --y1: 18px; --x2: 15px; --y2: -12px; --x3: -10px; --y3: 15px; --x4: 0px; --y4: 0px; animation-delay: 1s; }
-        .glitter:nth-child(3) { left: 70%; top: 25%; --x1: 15px; --y1: 20px; --x2: -10px; --y2: -15px; --x3: 12px; --y3: 18px; --x4: 0px; --y4: 0px; animation-delay: 2s; }
-        .glitter:nth-child(4) { left: 80%; top: 45%; --x1: -18px; --y1: -12px; --x2: 12px; --y2: 18px; --x3: -15px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 3s; }
-        .glitter:nth-child(5) { left: 20%; top: 65%; --x1: 12px; --y1: -18px; --x2: -15px; --y2: 12px; --x3: 10px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 4s; }
-        .glitter:nth-child(6) { left: 85%; top: 70%; --x1: -10px; --y1: 15px; --x2: 18px; --y2: -10px; --x3: -12px; --y3: 12px; --x4: 0px; --y4: 0px; animation-delay: 5s; }
-        .glitter:nth-child(7) { left: 45%; top: 15%; --x1: 8px; --y1: 20px; --x2: -12px; --y2: -18px; --x3: 15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 6s; }
-        .glitter:nth-child(8) { left: 60%; top: 80%; --x1: -15px; --y1: -10px; --x2: 10px; --y2: 15px; --x3: -12px; --y3: -8px; --x4: 0px; --y4: 0px; animation-delay: 7s; }
-        .glitter:nth-child(9) { left: 35%; top: 55%; --x1: 18px; --y1: -15px; --x2: -8px; --y2: 12px; --x3: 10px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 0.5s; }
-        .glitter:nth-child(10) { left: 50%; top: 40%; --x1: -12px; --y1: 12px; --x2: 15px; --y2: -15px; --x3: -10px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 1.5s; }
-        .glitter:nth-child(11) { left: 10%; top: 50%; --x1: 15px; --y1: -12px; --x2: -10px; --y2: 18px; --x3: 12px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 2.5s; }
-        .glitter:nth-child(12) { left: 90%; top: 30%; --x1: -10px; --y1: 15px; --x2: 12px; --y2: -12px; --x3: -15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 3.5s; }
-        .glitter:nth-child(13) { left: 30%; top: 75%; --x1: 12px; --y1: 18px; --x2: -15px; --y2: -10px; --x3: 10px; --y3: 12px; --x4: 0px; --y4: 0px; animation-delay: 4.5s; }
-        .glitter:nth-child(14) { left: 75%; top: 60%; --x1: -18px; --y1: -8px; --x2: 10px; --y2: 15px; --x3: -12px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 5.5s; }
-        .glitter:nth-child(15) { left: 55%; top: 10%; --x1: 10px; --y1: -15px; --x2: -12px; --y2: 18px; --x3: 15px; --y3: -12px; --x4: 0px; --y4: 0px; animation-delay: 6.5s; }
+        /* Diamond positions */
+        .diamond:nth-child(1) { left: 15%; top: 20%; --x1: 10px; --y1: -15px; --x2: -8px; --y2: 20px; --x3: 12px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 0s; }
+        .diamond:nth-child(2) { left: 25%; top: 35%; --x1: -12px; --y1: 18px; --x2: 15px; --y2: -12px; --x3: -10px; --y3: 15px; --x4: 0px; --y4: 0px; animation-delay: 1s; }
+        .diamond:nth-child(3) { left: 70%; top: 25%; --x1: 15px; --y1: 20px; --x2: -10px; --y2: -15px; --x3: 12px; --y3: 18px; --x4: 0px; --y4: 0px; animation-delay: 2s; }
+        .diamond:nth-child(4) { left: 80%; top: 45%; --x1: -18px; --y1: -12px; --x2: 12px; --y2: 18px; --x3: -15px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 3s; }
+        .diamond:nth-child(5) { left: 20%; top: 65%; --x1: 12px; --y1: -18px; --x2: -15px; --y2: 12px; --x3: 10px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 4s; }
+        .diamond:nth-child(6) { left: 85%; top: 70%; --x1: -10px; --y1: 15px; --x2: 18px; --y2: -10px; --x3: -12px; --y3: 12px; --x4: 0px; --y4: 0px; animation-delay: 5s; }
+        .diamond:nth-child(7) { left: 45%; top: 15%; --x1: 8px; --y1: 20px; --x2: -12px; --y2: -18px; --x3: 15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 6s; }
+        .diamond:nth-child(8) { left: 60%; top: 80%; --x1: -15px; --y1: -10px; --x2: 10px; --y2: 15px; --x3: -12px; --y3: -8px; --x4: 0px; --y4: 0px; animation-delay: 7s; }
+        .diamond:nth-child(9) { left: 35%; top: 55%; --x1: 18px; --y1: -15px; --x2: -8px; --y2: 12px; --x3: 10px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 0.5s; }
+        .diamond:nth-child(10) { left: 50%; top: 40%; --x1: -12px; --y1: 12px; --x2: 15px; --y2: -15px; --x3: -10px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 1.5s; }
+        .diamond:nth-child(11) { left: 10%; top: 50%; --x1: 15px; --y1: -12px; --x2: -10px; --y2: 18px; --x3: 12px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 2.5s; }
+        .diamond:nth-child(12) { left: 90%; top: 30%; --x1: -10px; --y1: 15px; --x2: 12px; --y2: -12px; --x3: -15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 3.5s; }
         
-        /* Welcome text */
+        /* Welcome text - Inter */
         .welcome-text {
+            font-family: 'Inter', sans-serif;
             font-size: 1.5rem;
             color: #9B8470;
             margin-bottom: 2rem;
@@ -214,7 +152,7 @@
             to { opacity: 1; }
         }
         
-        /* Typing text */
+        /* Typing text - Inter */
         .typing-container {
             min-height: 80px;
             margin-bottom: 3rem;
@@ -223,17 +161,18 @@
         }
         
         .typing-text {
-            font-family: 'Allura', cursive;
-            font-size: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
             color: #B8956A;
-            line-height: 1.6;
+            line-height: 1.8;
             display: inline;
+            font-weight: 400;
         }
         
         .cursor {
             display: inline-block;
             width: 2px;
-            height: 2rem;
+            height: 1.5rem;
             background: #B8956A;
             margin-left: 3px;
             animation: blink 0.7s infinite;
@@ -245,7 +184,7 @@
             51%, 100% { opacity: 0; }
         }
         
-        /* Premium button */
+        /* Premium button - Inter */
         .enter-button {
             display: inline-block;
             padding: 1.1rem 2.5rem;
@@ -253,6 +192,7 @@
             color: #FAF8F3;
             text-decoration: none;
             border-radius: 12px;
+            font-family: 'Inter', sans-serif;
             font-size: 1.1rem;
             font-weight: 500;
             letter-spacing: 0.3px;
@@ -293,24 +233,6 @@
             transform: translateY(-1px);
         }
         
-        /* Light rays */
-        .light-rays {
-            position: fixed;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(ellipse at center, rgba(244, 228, 193, 0.08) 0%, transparent 60%);
-            animation: rotateRays 60s linear infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        @keyframes rotateRays {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
         /* Responsive */
         @media (max-width: 768px) {
             .logo {
@@ -327,49 +249,31 @@
             }
             
             .typing-text {
-                font-size: 1.6rem;
-            }
-            
-            .orb {
-                filter: blur(50px);
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated gradient orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    
-    <!-- Grid background -->
-    <div class="grid-background"></div>
-    
-    <!-- Light rays -->
-    <div class="light-rays"></div>
-    
     <!-- Main content -->
     <div class="welcome-container">
         <h1 class="logo">Pi-Epiphany</h1>
         
         <div class="glass-card">
-            <!-- Gold glitter particles -->
+            <!-- Diamond glitter particles -->
             <div class="glitter-container">
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
-                <div class="glitter"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
+                <div class="diamond"></div>
             </div>
             
             <p class="welcome-text">Welcome to my digital home.</p>
