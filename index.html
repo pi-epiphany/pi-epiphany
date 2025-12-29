@@ -8,7 +8,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -64,7 +64,7 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            max-width: 800px;
+            max-width: 900px;
             padding: 2rem;
         }
         
@@ -82,77 +82,211 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Door container */
+        /* Sophisticated magical door */
         .door-container {
-            width: 200px;
-            height: 300px;
+            width: 240px;
+            height: 360px;
             margin: 0 auto 3rem;
             position: relative;
-            perspective: 1000px;
+            perspective: 1500px;
+        }
+        
+        .door-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
         }
         
         .door {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #C9B8A8 0%, #B8956A 100%);
-            border-radius: 10px;
+            background: linear-gradient(165deg, #D4C4B0 0%, #B8956A 50%, #A08060 100%);
+            border-radius: 15px 15px 8px 8px;
             position: relative;
-            box-shadow: 0 10px 40px rgba(45, 45, 45, 0.3);
-            animation: doorPulse 3s ease-in-out infinite;
+            box-shadow: 
+                0 20px 60px rgba(45, 45, 45, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+            animation: doorGlow 4s ease-in-out infinite;
+            overflow: hidden;
         }
         
-        @keyframes doorPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 10px 40px rgba(45, 45, 45, 0.3); }
-            50% { transform: scale(1.02); box-shadow: 0 15px 50px rgba(184, 149, 106, 0.4); }
+        @keyframes doorGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 20px 60px rgba(45, 45, 45, 0.4),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+                    0 0 30px rgba(184, 149, 106, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 25px 70px rgba(184, 149, 106, 0.5),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+                    0 0 50px rgba(184, 149, 106, 0.6);
+            }
         }
         
-        .door-knob {
-            width: 15px;
-            height: 15px;
-            background: #B8956A;
-            border-radius: 50%;
+        /* Ornate door panels */
+        .door-panel {
             position: absolute;
-            right: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+        
+        .door-panel.top {
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            height: 120px;
+        }
+        
+        .door-panel.bottom {
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            height: 120px;
+        }
+        
+        /* Magical ornate details */
+        .door-ornament {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(184, 149, 106, 0.5);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .door-ornament::before,
+        .door-ornament::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .door-ornament::before {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .door-ornament::after {
+            height: 2px;
+            width: 100%;
             top: 50%;
             transform: translateY(-50%);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         
-        .door-frame {
+        /* Elegant door knob */
+        .door-knob {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #F4E4C1 0%, #B8956A 100%);
+            border-radius: 50%;
             position: absolute;
-            inset: -15px;
-            border: 3px solid #C9B8A8;
-            border-radius: 15px;
-            opacity: 0.5;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 
+                0 4px 12px rgba(0,0,0,0.4),
+                inset 0 2px 4px rgba(255,255,255,0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        /* Welcome text */
+        /* Door arch/frame */
+        .door-arch {
+            position: absolute;
+            top: -25px;
+            left: -25px;
+            right: -25px;
+            bottom: -25px;
+            border: 3px solid rgba(184, 149, 106, 0.3);
+            border-radius: 20px 20px 12px 12px;
+            box-shadow: 
+                inset 0 0 30px rgba(184, 149, 106, 0.2),
+                0 0 30px rgba(184, 149, 106, 0.1);
+        }
+        
+        /* Mystical light effect */
+        .door-light {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(ellipse at center, rgba(184, 149, 106, 0.3) 0%, transparent 50%);
+            animation: pulse 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        /* Sparkles around door */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #F4E4C1;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #B8956A;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1.5s; }
+        
+        /* Welcome text - more elegant */
         .welcome-text {
-            font-size: 2rem;
-            color: #2D2D2D;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #9B8470;
             margin-bottom: 2rem;
             font-weight: 300;
+            letter-spacing: 0.5px;
             animation: fadeIn 1.5s ease;
         }
         
-        /* Typing text */
+        /* Typing text - one line */
         .typing-container {
-            min-height: 120px;
+            min-height: 80px;
             margin-bottom: 3rem;
         }
         
         .typing-text {
             font-family: 'Allura', cursive;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #B8956A;
             line-height: 1.6;
-            display: inline-block;
+            display: inline;
         }
         
         .cursor {
             display: inline-block;
             width: 2px;
-            height: 2.5rem;
+            height: 2.2rem;
             background: #B8956A;
             margin-left: 3px;
             animation: blink 0.7s infinite;
@@ -164,24 +298,28 @@
             51%, 100% { opacity: 0; }
         }
         
-        /* Enter button */
+        /* Enter button - 3D effect */
         .enter-button {
             display: inline-block;
             padding: 1.2rem 3rem;
             background: linear-gradient(135deg, #C9B8A8 0%, #B8956A 100%);
-            color: white;
+            color: #FAF8F3;
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.2rem;
             font-weight: 500;
-            box-shadow: 0 10px 30px rgba(184, 149, 106, 0.4);
+            box-shadow: 
+                0 10px 30px rgba(184, 149, 106, 0.4),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
             opacity: 0;
-            animation: fadeInButton 0.5s ease 4s forwards;
+            animation: fadeInButton 0.5s ease 3.5s forwards;
             position: relative;
             overflow: hidden;
             cursor: pointer;
             border: none;
+            transform-style: preserve-3d;
         }
         
         @keyframes fadeInButton {
@@ -195,13 +333,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: left 0.5s;
         }
         
         .enter-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(184, 149, 106, 0.6);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(184, 149, 106, 0.6),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .enter-button:hover::before {
@@ -209,7 +350,11 @@
         }
         
         .enter-button:active {
-            transform: translateY(-1px) scale(1.02);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(184, 149, 106, 0.5),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.3);
         }
         
         /* Light rays effect */
@@ -220,12 +365,12 @@
             top: -50%;
             left: -50%;
             background: radial-gradient(ellipse at center, rgba(184, 149, 106, 0.1) 0%, transparent 70%);
-            animation: rotate 60s linear infinite;
+            animation: rotateRays 60s linear infinite;
             pointer-events: none;
             z-index: 1;
         }
         
-        @keyframes rotate {
+        @keyframes rotateRays {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
@@ -237,16 +382,21 @@
             }
             
             .welcome-text {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             
             .typing-text {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .door-container {
-                width: 150px;
-                height: 225px;
+                width: 180px;
+                height: 270px;
+            }
+            
+            .enter-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
             }
         }
     </style>
@@ -263,9 +413,19 @@
         <h1 class="logo">Pi-Epiphany</h1>
         
         <div class="door-container">
-            <div class="door-frame"></div>
-            <div class="door">
-                <div class="door-knob"></div>
+            <div class="door-light"></div>
+            <div class="door-arch"></div>
+            <div class="door-wrapper">
+                <div class="door">
+                    <div class="door-panel top"></div>
+                    <div class="door-panel bottom"></div>
+                    <div class="door-ornament"></div>
+                    <div class="door-knob"></div>
+                </div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
             </div>
         </div>
         
@@ -291,19 +451,15 @@
             particlesContainer.appendChild(particle);
         }
         
-        // Typing animation
-        const text = "Where systems meet stories,\nand curiosity leads the way.";
+        // Typing animation - ONE LINE
+        const text = "Where systems meet stories, and curiosity leads the way.";
         const typingElement = document.getElementById('typingText');
         const cursor = document.getElementById('cursor');
         let index = 0;
         
         function type() {
             if (index < text.length) {
-                if (text[index] === '\n') {
-                    typingElement.innerHTML += '<br>';
-                } else {
-                    typingElement.textContent += text[index];
-                }
+                typingElement.textContent += text[index];
                 index++;
                 setTimeout(type, 80); // Medium speed
             } else {
