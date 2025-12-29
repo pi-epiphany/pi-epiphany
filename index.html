@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi-Epiphany | eCommerce Ops & AI Systems</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #78350f;
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23d97706' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4V2'/%3E%3Cpath d='M15 16v-2'/%3E%3Cpath d='M8 9h2'/%3E%3Cpath d='M20 9h2'/%3E%3Cpath d='M17.8 11.8 19 13'/%3E%3Cpath d='M15 9h0'/%3E%3Cpath d='M17.8 6.2 19 5'/%3E%3Cpath d='m3 21 9-9'/%3E%3Cpath d='M12.2 6.2 11 5'/%3E%3C/svg%3E") 12 12, auto;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 251, 235, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(217, 119, 6, 0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #92400e;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #d97706;
+        }
+        
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hero Section - Select Player */
+        #home {
+            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fecaca 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(217, 119, 6, 0.3);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #78350f;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #92400e;
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+        
+        /* Character Cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .character-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid #fcd34d;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .character-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(254, 243, 199, 0.4), rgba(254, 215, 170, 0.6));
+            opacity: 0;
+            transition: opacity 0.5s;
+            border-radius: 20px;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(217, 119, 6, 0.3);
+        }
+        
+        .character-card:hover::before {
+            opacity: 1;
+        }
+        
+        .character-card.human::before {
+            background: linear-gradient(135deg, rgba(254, 243, 199, 0.4), rgba(254, 202, 202, 0.6));
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #fcd34d, #fb923c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(217, 119, 6, 0.3);
+        }
+        
+        .card-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #78350f;
+        }
+        
+        .card-subtitle {
+            color: #92400e;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        
+        .card-description {
+            color: #92400e;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Stats */
+        .stat {
+            margin-bottom: 1rem;
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .stat-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #92400e;
+            font-weight: 500;
+        }
+        
+        .stat-value {
+            color: #78350f;
+            font-weight: 600;
+        }
+        
+        .stat-bar {
+            height: 8px;
+            background: #fef3c7;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d97706, #f59e0b);
+            border-radius: 10px;
+            transition: width 1s ease;
+            width: 0;
+        }
+        
+        .character-card:hover .stat-fill {
+            width: var(--stat-width) !important;
+        }
+        
+        .hover-hint {
+            text-align: center;
+            color: #92400e;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .character-card:hover .hover-hint {
+            opacity: 1;
+        }
+        
+        /* Portfolio Section */
+        #portfolio {
+            background: #fffbeb;
+        }
+        
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            color: #78350f;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: #92400e;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        /* About Section */
+        .about-section {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        
+        .about-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fcd34d, #fb923c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 20px 40px rgba(217, 119, 6, 0.2);
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            color: #78350f;
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            color: #92400e;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .bento-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(217, 119, 6, 0.2);
+        }
+        
+        .bento-card h4 {
+            color: #78350f;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .bento-card .badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .bento-card p {
+            color: #92400e;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .bento-card ul {
+            list-style: none;
+            color: #92400e;
+        }
+        
+        .bento-card li {
+            padding: 0.25rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .bento-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #d97706;
+        }
+        
+        /* Skills Grid */
+        .skills-section {
+            margin-bottom: 3rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .skill-tag {
+            background: white;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: #92400e;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(217, 119, 6, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .skill-tag:hover {
+            background: #fef3c7;
+            transform: scale(1.05);
+        }
+        
+        /* Fun Facts */
+        .fun-facts {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.1);
+        }
+        
+        .fun-facts h4 {
+            color: #78350f;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .fun-facts ol {
+            color: #92400e;
+            line-height: 1.8;
+            padding-left: 1.5rem;
+        }
+        
+        .fun-facts li {
+            margin-bottom: 1rem;
+        }
+        
+        /* Blog Section */
+        #blog {
+            background: linear-gradient(135deg, #fef3c7 0%, #fecaca 100%);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(217, 119, 6, 0.2);
+        }
+        
+        .blog-icon {
+            width: 50px;
+            height: 50px;
+            background: #fef3c7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #d97706;
+        }
+        
+        .blog-card h4 {
+            color: #78350f;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-card p {
+            color: #92400e;
+            line-height: 1.6;
+        }
+        
+        .coming-soon {
+            background: #fef3c7;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: #92400e;
+            margin-top: 2rem;
+        }
+        
+        /* Contact Section */
+        #contact {
+            background: #fffbeb;
+        }
+        
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(217, 119, 6, 0.2);
+            text-decoration: none;
+            color: #78350f;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        
+        .contact-email:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(217, 119, 6, 0.3);
+            background: #fef3c7;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d97706;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: #fef3c7;
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-photo {
+                margin: 0 auto;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#portfolio">The Hybrid</a></li>
+            <li><a href="#blog">The Human</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section - Select Player -->
+    <section id="home">
+        <div class="particles" id="particles"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Pi-Epiphany</h1>
+            <p class="hero-subtitle">Select Your Player</p>
+            
+            <div class="cards-container">
+                <!-- The Hybrid Card -->
+                <div class="character-card" onclick="scrollToSection('portfolio')">
+                    <div class="card-content">
+                        <div class="card-photo">👤</div>
+                        <h2 class="card-title">The Hybrid</h2>
+                        <p class="card-subtitle">eCommerce Ops & AI Systems</p>
+                        <p class="card-description">Building systems that scale, learning automation that transforms</p>
+                        
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <i data-lucide="trending-up" style="width: 16px; height: 16px;"></i>
+                                    Amazon Mastery
+                                </span>
+                                <span class="stat-value">Lvl 95</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="--stat-width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <i data-lucide="brain" style="width: 16px; height: 16px;"></i>
+                                    Automation
+                                </span>
+                                <span class="stat-value">Lvl 75</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="--stat-width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <p class="hover-hint">Click to enter →</p>
+                    </div>
+                </div>
+                
+                <!-- The Human Card -->
+                <div class="character-card human" onclick="scrollToSection('blog')">
+                    <div class="card-content">
+                        <div class="card-photo">🌟</div>
+                        <h2 class="card-title">The Human</h2>
+                        <p class="card-subtitle">Epiphanies & Random Thoughts</p>
+                        <p class="card-description">Curiosity-driven musings, chess strategies, and life reflections</p>
+                        
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <i data-lucide="sparkles" style="width: 16px; height: 16px;"></i>
+                                    Curiosity
+                                </span>
+                                <span class="stat-value">MAX</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="--stat-width: 100%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat">
+                            <div class="stat-header">
+                                <span class="stat-label">
+                                    <i data-lucide="heart" style="width: 16px; height: 16px;"></i>
+                                    Openness
+                                </span>
+                                <span class="stat-value">Lvl 98</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="--stat-width: 98%"></div>
+                            </div>
+                        </div>
+                        
+                        <p class="hover-hint">Click to enter →</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 3rem; color: #92400e; font-weight: 300;">Where systems meet stories</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">The Hybrid</h2>
+                <p class="section-subtitle">eCommerce Operations & AI Automation</p>
+            </div>
+            
+            <!-- About Section -->
+            <div class="about-section">
+                <div class="about-photo">👤</div>
+                <div class="about-text">
+                    <h3>Hi, I'm Epiphany (Pi)</h3>
+                    <p>I help eCommerce entrepreneurs scale their Amazon businesses through hands-on operations and emerging automation systems.</p>
+                    <p>I didn't start in eCommerce. My first role was in HR and Administration, but curiosity about the digital economy pulled me toward freelancing—first in sales, then into online business operations.</p>
+                    <p>Since 2021, I've specialized in Amazon wholesale and online arbitrage, managing product research, supplier relationships, account optimization, and operations for multiple seven-figure stores. I handle everything from brand outreach and A+ content to inventory tracking and PPC optimization.</p>
+                    <p>Currently, I'm expanding into AI automation at MetaKnowLabs, learning to build workflow systems that scale operations. I'm bridging my eCommerce expertise with emerging automation tools—because the future of operations is intelligent, not just efficient.</p>
+                </div>
+            </div>
+            
+            <!-- Experience Bento Grid -->
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <h4>eCommerce Client Management</h4>
+                    <span class="badge">3+ Years</span>
+                    <p>Specializing in Amazon business operations. Handling product research, supplier relations, account optimization, and full admin management for multiple seven-figure stores.</p>
+                </div>
+                
+                <div class="bento-card">
+                    <h4>AI Automation Trainee</h4>
+                    <span class="badge">Current</span>
+                    <p>Learning workflow automation and systems design at MetaKnowLabs. Building foundational skills in automation architecture.</p>
+                </div>
+            </div>
+            
+            <!-- Core Skills -->
+            <div class="skills-section">
+                <h3 style="color: #78350f; font-size: 2rem; margin-bottom: 1.5rem; text-align: center;">Core Skills</h3>
+                <div class="bento-grid">
+                    <div class="bento-card">
+                        <h4>Amazon Operations</h4>
+                        <ul>
+                            <li>Product Research</li>
+                            <li>Supplier Interaction</li>
+                            <li>Account Management</li>
+                            <li>Account Scaling</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bento-card">
+                        <h4>AI Automation (Learning)</h4>
+                        <ul>
+                            <li>n8n | GHL | Zapier</li>
+                            <li>Make | VAPI</li>
+                            <li>Retell AI</li>
+                            <li>Google App Script</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools -->
+            <div class="skills-section">
+                <h3 style="color: #78350f; font-size: 2rem; margin-bottom: 1.5rem; text-align: center;">Tools & Platforms</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">Keepa</div>
+                    <div class="skill-tag">SellerAMP</div>
+                    <div class="skill-tag">Jungle Scout</div>
+                    <div class="skill-tag">BuyBotPro</div>
+                    <div class="skill-tag">Arbisource</div>
+                    <div class="skill-tag">Notion</div>
+                    <div class="skill-tag">n8n</div>
+                    <div class="skill-tag">Zapier</div>
+                    <div class="skill-tag">GoHighLevel</div>
+                    <div class="skill-tag">Make</div>
+                    <div class="skill-tag">VAPI</div>
+                    <div class="skill-tag">Amazon</div>
+                    <div class="skill-tag">Shopify</div>
+                </div>
+            </div>
+            
+            <!-- Fun Facts -->
+            <div class="fun-facts">
+                <h4>3 Fun Facts About Me</h4>
+                <p style="text-align: center; color: #92400e; margin-bottom: 1.5rem; font-size: 0.9rem;">Little things that shaped my curiosity, leadership, and adaptability</p>
+                <ol>
+                    <li>I once led a collaborative coaching project, teaching 25+ aspiring Filipino virtual assistants how to work with Amazon sellers in the wholesale business model.</li>
+                    <li>I play chess when I'm overthinking; it helps me slow down, see patterns, and make clearer decisions.</li>
+                    <li>I love learning languages. I'm currently studying German for professional growth, and Spanish is next since it feels naturally connected to the Filipino language.</li>
+                </ol>
+            </div>
+            
+            <!-- LinkedIn Button -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="contact-email">
+                    <i data-lucide="linkedin" style="width: 24px; height: 24px;"></i>
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">The Human</h2>
+                <p class="section-subtitle">Thoughts, Reflections & Learning</p>
+            </div>
+            
+            <div class="blog-grid">
+                <a href="blog/ecommerce-life-lessons.html" class="blog-card">
+                    <div class="blog-icon">
+                        <i data-lucide="heart" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h4>Why eCommerce Taught Me About Life</h4>
+                    <p>Lessons in systems, resilience, and unexpected growth from managing online businesses.</p>
+                </a>
+                
+                <a href="blog/coffee-shop-chronicles.html" class="blog-card">
+                    <div class="blog-icon">
+                        <i data-lucide="coffee" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h4>The Coffee Shop Chronicles</h4>
+                    <p>Real conversations and observations from local cafes that changed my perspective.</p>
+                </a>
+                
+                <a href="blog/learning-by-doing.html" class="blog-card">
+                    <div class="blog-icon">
+                        <i data-lucide="bookmark" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h4>Learning by Doing</h4>
+                    <p>My authentic journey into automation—the wins, the mistakes, and everything between.</p>
+                </a>
+            </div>
+            
+            <div class="coming-soon">
+                <p><strong>What's Coming:</strong> Tutorials, guides, and maybe some products in the future. For now, I'm focused on sharing authentic learning and real experiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-content">
+            <div class="contact-content">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Open for collaboration, questions, or just a good conversation</p>
+                
+                <a href="mailto:epiphany.vaph@gmail.com" class="contact-email">
+                    <i data-lucide="mail" style="width: 24px; height: 24px;"></i>
+                    epiphany.vaph@gmail.com
+                </a>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="social-link">
+                        <i data-lucide="linkedin" style="width: 24px; height: 24px;"></i>
+                    </a>
+                    <!-- Add more social links as needed -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Pi-Epiphany. Built with curiosity and code.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Generate floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Smooth scroll function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Animate stat bars on card hover
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelectorAll('.stat-fill').forEach(fill => {
+                    fill.style.width = fill.style.getPropertyValue('--stat-width');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
