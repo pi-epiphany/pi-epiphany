@@ -325,6 +325,10 @@
         .cta-section {
             text-align: center;
             margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
         }
         
         .cta-button {
@@ -342,13 +346,23 @@
                 inset 0 1px 2px rgba(255, 255, 255, 0.4);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            margin: 0.5rem;
         }
         
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 
                 0 16px 45px rgba(212, 165, 184, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Discord button */
+        .cta-button.discord {
+            background: linear-gradient(135deg, #8B96D4 0%, #A5B0E8 50%, #8B96D4 100%);
+        }
+        
+        .cta-button.discord:hover {
+            box-shadow: 
+                0 16px 45px rgba(139, 150, 212, 0.5),
                 inset 0 2px 4px rgba(255, 255, 255, 0.5);
         }
         
@@ -375,6 +389,16 @@
             
             .blog-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -441,8 +465,9 @@
         
         <!-- CTA Section -->
         <section class="cta-section">
-            <a href="mailto:epiphany.vaph@gmail.com" class="cta-button">Coffee Chat?</a>
-            <a href="mailto:epiphany.vaph@gmail.com" class="cta-button">Drop Me a Line</a>
+            <a href="mailto:hello@pi-epiphany.com" class="cta-button">Coffee Chat?</a>
+            <a href="mailto:hello@pi-epiphany.com" class="cta-button">Drop Me a Line</a>
+            <a href="https://discord.com/users/epiphany.to" target="_blank" class="cta-button discord">Work Together on Discord</a>
         </section>
         
         <!-- Footer -->
