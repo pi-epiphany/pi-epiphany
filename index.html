@@ -129,7 +129,7 @@
             backdrop-filter: blur(20px);
             border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.95);
-            padding: 4rem 3rem;
+            padding: 5rem 3rem;
             box-shadow: 
                 0 20px 60px rgba(45, 45, 45, 0.12),
                 inset 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -139,176 +139,64 @@
             animation: fadeInUp 1s ease 0.6s forwards;
         }
         
-        /* Elegant doors container */
-        .doors-container {
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 3rem;
-            position: relative;
-            opacity: 0;
-            animation: fadeIn 1s ease 1s forwards;
-            perspective: 1000px;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Magical glow behind doors (revealed when they open) */
-        .door-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, 
-                rgba(244, 228, 193, 0.8) 0%, 
-                rgba(232, 213, 183, 0.6) 30%,
-                rgba(212, 196, 176, 0.3) 60%,
-                transparent 100%
-            );
-            filter: blur(20px);
-            opacity: 0;
-            transition: opacity 1.5s ease;
-            z-index: 0;
-        }
-        
-        .doors-container.opening .door-glow {
-            opacity: 1;
-        }
-        
-        /* Door frame/archway */
-        .door-frame {
+        /* Gold glitter particles */
+        .glitter-container {
             position: absolute;
             inset: 0;
-            border: 3px solid rgba(184, 149, 106, 0.3);
-            border-radius: 8px 8px 0 0;
             pointer-events: none;
-            z-index: 3;
+            overflow: hidden;
         }
         
-        /* Individual doors */
-        .door {
+        .glitter {
             position: absolute;
-            width: 50%;
-            height: 100%;
-            top: 0;
-            background: linear-gradient(135deg, #D4C4B0 0%, #C9B8A8 30%, #B8956A 100%);
-            box-shadow: 
-                0 10px 30px rgba(45, 45, 45, 0.3),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center;
-            z-index: 2;
-        }
-        
-        .door-left {
-            left: 0;
-            border-radius: 8px 0 0 0;
-            border-right: 2px solid rgba(155, 132, 112, 0.4);
-        }
-        
-        .door-right {
-            right: 0;
-            border-radius: 0 8px 0 0;
-            border-left: 2px solid rgba(155, 132, 112, 0.4);
-        }
-        
-        /* Opening animation */
-        .doors-container.opening .door-left {
-            transform: perspective(1000px) rotateY(-95deg);
-            transform-origin: left center;
-        }
-        
-        .doors-container.opening .door-right {
-            transform: perspective(1000px) rotateY(95deg);
-            transform-origin: right center;
-        }
-        
-        /* Door panels (decorative) */
-        .door-panel {
-            position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-        }
-        
-        .door-left .door-panel-top {
-            top: 30px;
-            left: 15px;
-            right: 15px;
-            height: 90px;
-        }
-        
-        .door-left .door-panel-bottom {
-            bottom: 30px;
-            left: 15px;
-            right: 15px;
-            height: 90px;
-        }
-        
-        .door-right .door-panel-top {
-            top: 30px;
-            left: 15px;
-            right: 15px;
-            height: 90px;
-        }
-        
-        .door-right .door-panel-bottom {
-            bottom: 30px;
-            left: 15px;
-            right: 15px;
-            height: 90px;
-        }
-        
-        /* Door knobs */
-        .door-knob {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: radial-gradient(circle, #F4E4C1 0%, #D4B896 50%, #B8956A 100%);
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #F4E4C1 0%, #D4B896 100%);
             border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.3),
-                inset 0 2px 4px rgba(255, 255, 255, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-        
-        .door-left .door-knob {
-            right: 20px;
-        }
-        
-        .door-right .door-knob {
-            left: 20px;
-        }
-        
-        /* Sparkles around doors */
-        .door-sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, #F4E4C1 0%, transparent 100%);
-            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(244, 228, 193, 0.8);
+            animation: glitterFloat 8s ease-in-out infinite;
             opacity: 0;
-            animation: sparkle 2s ease-in-out infinite;
         }
         
-        @keyframes sparkle {
-            0%, 100% { 
-                opacity: 0; 
-                transform: scale(0);
+        @keyframes glitterFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(0);
+                opacity: 0;
             }
-            50% { 
-                opacity: 1; 
-                transform: scale(1.5);
+            10% {
+                opacity: 1;
+                transform: translate(var(--x1), var(--y1)) scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(var(--x2), var(--y2)) scale(1.3);
+            }
+            90% {
+                opacity: 1;
+                transform: translate(var(--x3), var(--y3)) scale(1);
+            }
+            100% {
+                transform: translate(var(--x4), var(--y4)) scale(0);
+                opacity: 0;
             }
         }
         
-        .door-sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .door-sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
-        .door-sparkle:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 1s; }
-        .door-sparkle:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 1.5s; }
+        /* Generate random glitter positions */
+        .glitter:nth-child(1) { left: 15%; top: 20%; --x1: 10px; --y1: -15px; --x2: -8px; --y2: 20px; --x3: 12px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 0s; }
+        .glitter:nth-child(2) { left: 25%; top: 35%; --x1: -12px; --y1: 18px; --x2: 15px; --y2: -12px; --x3: -10px; --y3: 15px; --x4: 0px; --y4: 0px; animation-delay: 1s; }
+        .glitter:nth-child(3) { left: 70%; top: 25%; --x1: 15px; --y1: 20px; --x2: -10px; --y2: -15px; --x3: 12px; --y3: 18px; --x4: 0px; --y4: 0px; animation-delay: 2s; }
+        .glitter:nth-child(4) { left: 80%; top: 45%; --x1: -18px; --y1: -12px; --x2: 12px; --y2: 18px; --x3: -15px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 3s; }
+        .glitter:nth-child(5) { left: 20%; top: 65%; --x1: 12px; --y1: -18px; --x2: -15px; --y2: 12px; --x3: 10px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 4s; }
+        .glitter:nth-child(6) { left: 85%; top: 70%; --x1: -10px; --y1: 15px; --x2: 18px; --y2: -10px; --x3: -12px; --y3: 12px; --x4: 0px; --y4: 0px; animation-delay: 5s; }
+        .glitter:nth-child(7) { left: 45%; top: 15%; --x1: 8px; --y1: 20px; --x2: -12px; --y2: -18px; --x3: 15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 6s; }
+        .glitter:nth-child(8) { left: 60%; top: 80%; --x1: -15px; --y1: -10px; --x2: 10px; --y2: 15px; --x3: -12px; --y3: -8px; --x4: 0px; --y4: 0px; animation-delay: 7s; }
+        .glitter:nth-child(9) { left: 35%; top: 55%; --x1: 18px; --y1: -15px; --x2: -8px; --y2: 12px; --x3: 10px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 0.5s; }
+        .glitter:nth-child(10) { left: 50%; top: 40%; --x1: -12px; --y1: 12px; --x2: 15px; --y2: -15px; --x3: -10px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 1.5s; }
+        .glitter:nth-child(11) { left: 10%; top: 50%; --x1: 15px; --y1: -12px; --x2: -10px; --y2: 18px; --x3: 12px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 2.5s; }
+        .glitter:nth-child(12) { left: 90%; top: 30%; --x1: -10px; --y1: 15px; --x2: 12px; --y2: -12px; --x3: -15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 3.5s; }
+        .glitter:nth-child(13) { left: 30%; top: 75%; --x1: 12px; --y1: 18px; --x2: -15px; --y2: -10px; --x3: 10px; --y3: 12px; --x4: 0px; --y4: 0px; animation-delay: 4.5s; }
+        .glitter:nth-child(14) { left: 75%; top: 60%; --x1: -18px; --y1: -8px; --x2: 10px; --y2: 15px; --x3: -12px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 5.5s; }
+        .glitter:nth-child(15) { left: 55%; top: 10%; --x1: 10px; --y1: -15px; --x2: -12px; --y2: 18px; --x3: 15px; --y3: -12px; --x4: 0px; --y4: 0px; animation-delay: 6.5s; }
         
         /* Welcome text */
         .welcome-text {
@@ -318,7 +206,12 @@
             font-weight: 400;
             letter-spacing: 0.3px;
             opacity: 0;
-            animation: fadeIn 0.8s ease 1.2s forwards;
+            animation: fadeIn 0.8s ease 1s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         /* Typing text */
@@ -426,12 +319,7 @@
             }
             
             .glass-card {
-                padding: 3rem 2rem;
-            }
-            
-            .doors-container {
-                width: 220px;
-                height: 220px;
+                padding: 4rem 2rem;
             }
             
             .welcome-text {
@@ -465,33 +353,23 @@
         <h1 class="logo">Pi-Epiphany</h1>
         
         <div class="glass-card">
-            <!-- Elegant magical doors -->
-            <div class="doors-container" id="doors">
-                <!-- Magical glow (revealed when doors open) -->
-                <div class="door-glow"></div>
-                
-                <!-- Door frame -->
-                <div class="door-frame"></div>
-                
-                <!-- Left door -->
-                <div class="door door-left">
-                    <div class="door-panel door-panel-top"></div>
-                    <div class="door-panel door-panel-bottom"></div>
-                    <div class="door-knob"></div>
-                </div>
-                
-                <!-- Right door -->
-                <div class="door door-right">
-                    <div class="door-panel door-panel-top"></div>
-                    <div class="door-panel door-panel-bottom"></div>
-                    <div class="door-knob"></div>
-                </div>
-                
-                <!-- Sparkles -->
-                <div class="door-sparkle"></div>
-                <div class="door-sparkle"></div>
-                <div class="door-sparkle"></div>
-                <div class="door-sparkle"></div>
+            <!-- Gold glitter particles -->
+            <div class="glitter-container">
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
+                <div class="glitter"></div>
             </div>
             
             <p class="welcome-text">Welcome to my digital home.</p>
@@ -501,7 +379,7 @@
                 <span class="cursor" id="cursor"></span>
             </div>
             
-            <a href="select.html" class="enter-button" id="enterBtn">Step Inside</a>
+            <a href="select.html" class="enter-button">Step Inside</a>
         </div>
     </div>
 
@@ -525,20 +403,6 @@
         }
         
         setTimeout(type, 1500);
-        
-        // Door opening animation when clicking "Step Inside"
-        const enterBtn = document.getElementById('enterBtn');
-        const doors = document.getElementById('doors');
-        
-        enterBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            doors.classList.add('opening');
-            
-            // Navigate to select.html after doors open
-            setTimeout(() => {
-                window.location.href = 'select.html';
-            }, 1500);
-        });
     </script>
 </body>
 </html>
