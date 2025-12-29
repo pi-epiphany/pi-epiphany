@@ -28,12 +28,12 @@
             position: relative;
         }
         
-        /* Animated gradient orbs */
+        /* Animated gradient orbs - MORE VISIBLE */
         .orb {
             position: fixed;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
+            filter: blur(60px);
+            opacity: 0.6;
             animation: float 20s ease-in-out infinite;
             pointer-events: none;
         }
@@ -98,15 +98,15 @@
             padding: 2rem;
         }
         
-        /* Logo */
+        /* Logo - BIGGER and CLOSER */
         .logo {
             font-family: 'Allura', cursive;
-            font-size: 5rem;
+            font-size: 6.5rem;
             background: linear-gradient(135deg, #9B8470 0%, #D4B896 50%, #B8956A 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             opacity: 0;
             animation: fadeInUp 1s ease 0.3s forwards;
             filter: drop-shadow(0 4px 12px rgba(155, 132, 112, 0.3));
@@ -164,7 +164,7 @@
             }
         }
         
-        /* Portal/Gateway visual */
+        /* Portal/Gateway visual - MORE VISIBLE */
         .portal {
             width: 200px;
             height: 200px;
@@ -183,26 +183,29 @@
             position: absolute;
             inset: 0;
             border-radius: 50%;
-            border: 2px solid;
+            border: 3px solid;
             animation: rotate 20s linear infinite;
         }
         
         .portal-ring:nth-child(1) {
-            border-color: rgba(184, 149, 106, 0.3);
+            border-color: rgba(184, 149, 106, 0.6);
             animation-duration: 20s;
+            box-shadow: 0 0 20px rgba(184, 149, 106, 0.3);
         }
         
         .portal-ring:nth-child(2) {
-            border-color: rgba(212, 165, 184, 0.2);
-            inset: 10px;
+            border-color: rgba(212, 165, 184, 0.5);
+            inset: 15px;
             animation-duration: 15s;
             animation-direction: reverse;
+            box-shadow: 0 0 15px rgba(212, 165, 184, 0.3);
         }
         
         .portal-ring:nth-child(3) {
-            border-color: rgba(201, 184, 168, 0.25);
-            inset: 20px;
+            border-color: rgba(201, 184, 168, 0.5);
+            inset: 30px;
             animation-duration: 25s;
+            box-shadow: 0 0 10px rgba(201, 184, 168, 0.3);
         }
         
         @keyframes rotate {
@@ -212,12 +215,12 @@
         
         .portal-center {
             position: absolute;
-            inset: 40px;
-            background: radial-gradient(circle, rgba(212, 184, 150, 0.4) 0%, rgba(155, 132, 112, 0.2) 100%);
+            inset: 50px;
+            background: radial-gradient(circle, rgba(212, 184, 150, 0.6) 0%, rgba(155, 132, 112, 0.3) 100%);
             border-radius: 50%;
             box-shadow: 
-                0 0 40px rgba(212, 184, 150, 0.4),
-                inset 0 0 30px rgba(255, 255, 255, 0.3);
+                0 0 50px rgba(212, 184, 150, 0.5),
+                inset 0 0 40px rgba(255, 255, 255, 0.4);
             animation: portalPulse 3s ease-in-out infinite;
         }
         
@@ -225,24 +228,25 @@
             0%, 100% { 
                 transform: scale(1);
                 box-shadow: 
-                    0 0 40px rgba(212, 184, 150, 0.4),
-                    inset 0 0 30px rgba(255, 255, 255, 0.3);
+                    0 0 50px rgba(212, 184, 150, 0.5),
+                    inset 0 0 40px rgba(255, 255, 255, 0.4);
             }
             50% { 
-                transform: scale(1.1);
+                transform: scale(1.15);
                 box-shadow: 
-                    0 0 60px rgba(212, 184, 150, 0.6),
-                    inset 0 0 40px rgba(255, 255, 255, 0.5);
+                    0 0 70px rgba(212, 184, 150, 0.7),
+                    inset 0 0 50px rgba(255, 255, 255, 0.6);
             }
         }
         
-        /* Floating particles - modern dots */
+        /* Floating particles - MORE VISIBLE */
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(184, 149, 106, 0.6);
+            width: 6px;
+            height: 6px;
+            background: rgba(184, 149, 106, 0.8);
             border-radius: 50%;
+            box-shadow: 0 0 10px rgba(184, 149, 106, 0.5);
             animation: particleFloat 15s ease-in-out infinite;
         }
         
@@ -308,11 +312,9 @@
             51%, 100% { opacity: 0; }
         }
         
-        /* Premium button */
+        /* Premium button - NO ARROW */
         .enter-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
+            display: inline-block;
             padding: 1.1rem 2.5rem;
             background: linear-gradient(135deg, #9B8470 0%, #B8956A 50%, #A08060 100%);
             color: #FAF8F3;
@@ -358,19 +360,11 @@
             transform: translateY(-1px);
         }
         
-        .arrow {
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-        
-        .enter-button:hover .arrow {
-            transform: translateX(5px);
-        }
-        
         /* Responsive */
         @media (max-width: 768px) {
             .logo {
-                font-size: 3.5rem;
+                font-size: 4rem;
+                margin-bottom: 1.5rem;
             }
             
             .glass-card {
@@ -391,13 +385,13 @@
             }
             
             .orb {
-                filter: blur(60px);
+                filter: blur(50px);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated gradient orbs -->
+    <!-- Animated gradient orbs - MORE VISIBLE -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -413,7 +407,7 @@
             <!-- Ambient card light -->
             <div class="card-light"></div>
             
-            <!-- Modern portal -->
+            <!-- Modern portal - MORE VISIBLE -->
             <div class="portal">
                 <div class="portal-ring"></div>
                 <div class="portal-ring"></div>
@@ -434,10 +428,7 @@
                 <span class="cursor" id="cursor"></span>
             </div>
             
-            <a href="select.html" class="enter-button">
-                <span>Step Inside</span>
-                <span class="arrow">→</span>
-            </a>
+            <a href="select.html" class="enter-button">Step Inside</a>
         </div>
     </div>
 
