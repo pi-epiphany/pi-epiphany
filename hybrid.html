@@ -231,6 +231,7 @@
         .section:nth-child(3) { animation-delay: 0.6s; }
         .section:nth-child(4) { animation-delay: 0.8s; }
         .section:nth-child(5) { animation-delay: 1s; }
+        .section:nth-child(6) { animation-delay: 1.2s; }
         
         .section-title {
             font-family: 'Cormorant Garamond', serif;
@@ -336,6 +337,62 @@
             box-shadow: 0 8px 20px rgba(155, 132, 112, 0.12);
         }
         
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 15px 40px rgba(45, 45, 45, 0.1);
+            position: relative;
+        }
+        
+        .quote-mark {
+            font-family: Georgia, serif;
+            font-size: 5rem;
+            color: #D4B896;
+            opacity: 0.2;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-size: 1.05rem;
+            color: #5A4A3A;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            padding-left: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-author {
+            padding-left: 30px;
+            border-left: 3px solid #B8956A;
+            margin-left: 30px;
+        }
+        
+        .author-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #78350f;
+            margin-bottom: 0.3rem;
+        }
+        
+        .author-title {
+            font-size: 0.95rem;
+            color: #B8956A;
+            font-weight: 500;
+        }
+        
         /* Fun Facts */
         .fun-facts {
             background: rgba(255, 255, 255, 0.85);
@@ -372,7 +429,7 @@
             margin-bottom: 1.2rem;
         }
         
-        /* CTA Buttons */
+        /* CTA Buttons with press effect */
         .cta-section {
             text-align: center;
             margin-top: 3rem;
@@ -394,6 +451,21 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             margin: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
         
         .cta-button:hover {
@@ -401,6 +473,18 @@
             box-shadow: 
                 0 16px 45px rgba(155, 132, 112, 0.5),
                 inset 0 2px 4px rgba(255, 255, 255, 0.4);
+        }
+        
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .cta-button:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 
+                0 4px 15px rgba(155, 132, 112, 0.3),
+                inset 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         /* Footer */
@@ -435,6 +519,14 @@
             
             .skills-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+            
+            .testimonial-card {
+                padding: 2.5rem 2rem;
+            }
+            
+            .quote-mark {
+                font-size: 4rem;
             }
         }
     </style>
@@ -536,6 +628,49 @@
             </div>
         </section>
         
+        <!-- Testimonials Section -->
+        <section class="section">
+            <h2 class="section-title">What Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <div class="testimonial-text">
+                        "You have great potential to become a top VA, but I want to know - what's holding you back?"
+                        <br><br>
+                        <em>This question hit differently. Zak was my first real client who took a chance on me when I was just starting out. He taught me the Amazon wholesale business model using his own tool, FBAmultitool, asked the right questions, and believed in my potential when I needed it most.</em>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">Zak Furness</div>
+                        <div class="author-title">Founder of FBAmultitool (February 2021)</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <div class="testimonial-text">
+                        "I just wanted to give you a bonus for all the great work you have done."
+                        <br><br>
+                        <em>Yannick didn't just say this once - he gave me bonuses multiple times and eventually increased my regular pay. Working with him for a year and a half taught me what it means to deliver consistent quality. His trust and recognition kept me motivated to always give my best.</em>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">Yannick</div>
+                        <div class="author-title">One2boom (June 2022 - July 2023)</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <div class="testimonial-text">
+                        Pie was extremely hardworking, adaptable, and took on new knowledge very well. She learned multiple sourcing methods and consistently gave her all in every task. Pie was flexible, always punctual, and never caused any concerns. We held regular calls together, and her English communication was excellent. She never shied away from a challenge and was an absolute pleasure to work with.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">Oliver Holden</div>
+                        <div class="author-title">Director, Holdens Enterprise LTD (January 2024 - September 2025)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- Fun Facts -->
         <section class="section">
             <div class="fun-facts">
@@ -552,9 +687,8 @@
         <!-- CTA Section -->
         <section class="cta-section">
             <a href="https://www.linkedin.com/in/epiphany-oliveros" target="_blank" class="cta-button">Say Hello on LinkedIn</a>
-            <a href="mailto:hello@pi-epiphany.com" class="cta-button">Let's Build Something</a>
-        </section>
-        
+            <a href="/cdn-cgi/l/email-protection#c2aaa7aeaead82b2abefa7b2abb2aaa3acbbeca1adaffdb1b7a0a8a7a1b6ff8ea7b6e5b1e280b7abaea6e291adafa7b6aaabaca5e3" class="cta-button">Let's Build Something</a>
+        </section>        
         <!-- Footer -->
         <footer class="footer">
             <p>&copy; 2025 Pi-Epiphany. Built with curiosity and systems.</p>
