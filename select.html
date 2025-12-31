@@ -94,7 +94,7 @@
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             opacity: 0;
             animation: fadeInUp 1s ease 0.2s forwards;
         }
@@ -121,7 +121,6 @@
             filter: drop-shadow(0 4px 12px rgba(155, 132, 112, 0.3));
         }
         
-        /* Changed from generic to elegant serif */
         .subtitle {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
@@ -130,15 +129,63 @@
             letter-spacing: 0.5px;
         }
         
+        /* Instruction text with elegant design */
+        .instruction {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: #B8956A;
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            position: relative;
+        }
+        
+        .instruction::before,
+        .instruction::after {
+            content: '⟡';
+            color: #D4B896;
+            margin: 0 1rem;
+            font-size: 1.1rem;
+        }
+        
         /* Cards container */
         .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 3rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
         }
         
-        /* Character card - CLEANER WHITE BACKGROUND */
+        /* Elegant arrow pointing to each card */
+        .card-wrapper {
+            position: relative;
+        }
+        
+        .pointing-arrow {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            color: #B8956A;
+            animation: bounce 2s ease-in-out infinite;
+            text-shadow: 0 2px 10px rgba(184, 149, 106, 0.3);
+            z-index: 5;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+        
+        /* Character card */
         .character-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
@@ -199,7 +246,7 @@
             z-index: 2;
         }
         
-        /* Photo container - BIGGER */
+        /* Photo container */
         .photo-container {
             width: 220px;
             height: 220px;
@@ -228,7 +275,7 @@
             object-fit: cover;
         }
         
-        /* Card title - Changed to serif, kept colors */
+        /* Card title */
         .card-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.8rem;
@@ -260,6 +307,7 @@
         /* Stats */
         .stats {
             margin-top: 2rem;
+            margin-bottom: 2rem;
         }
         
         .stat {
@@ -274,7 +322,6 @@
             font-size: 0.95rem;
         }
         
-        /* NO EMOJIS - clean text only */
         .stat-label {
             color: #9B8470;
             font-weight: 500;
@@ -308,19 +355,49 @@
             width: var(--progress) !important;
         }
         
-        /* Hover hint */
-        .hover-hint {
+        /* Learn about player button */
+        .learn-button {
+            display: block;
             text-align: center;
-            color: #B8956A;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-            opacity: 0;
-            transition: opacity 0.3s;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, #9B8470 0%, #B8956A 50%, #A08060 100%);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.95rem;
             font-weight: 500;
+            margin: 0 auto;
+            max-width: 250px;
+            box-shadow: 0 8px 20px rgba(155, 132, 112, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
         
-        .character-card:hover .hover-hint {
-            opacity: 1;
+        .learn-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .character-card:hover .learn-button {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(155, 132, 112, 0.4);
+        }
+        
+        .character-card:hover .learn-button::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .character-card:active .learn-button {
+            transform: translateY(1px) scale(0.98);
         }
         
         /* Back link */
@@ -355,6 +432,11 @@
                 max-width: 600px;
                 margin: 0 auto 3rem;
             }
+            
+            .pointing-arrow {
+                top: -40px;
+                font-size: 2.5rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -364,6 +446,10 @@
             
             .subtitle {
                 font-size: 1.8rem;
+            }
+            
+            .instruction {
+                font-size: 1.1rem;
             }
             
             .character-card {
@@ -401,85 +487,94 @@
             <p class="subtitle">Select Your Player</p>
         </div>
         
+        <!-- Instruction -->
+        <p class="instruction">Click on a card below to choose your path</p>
+        
         <!-- Character cards -->
         <div class="cards-container">
             <!-- The Hybrid Card -->
-            <a href="hybrid.html" class="character-card hybrid">
-                <div class="card-content">
-                    <div class="photo-container">
-                        <img src="hybrid-photo.jpg" alt="The Hybrid">
-                    </div>
-                    
-                    <h2 class="card-title">The Hybrid</h2>
-                    <p class="card-subtitle">eCommerce Ops & AI Systems</p>
-                    <p class="card-description">
-                        Building systems that scale, learning automation that transforms
-                    </p>
-                    
-                    <div class="stats">
-                        <div class="stat">
-                            <div class="stat-header">
-                                <span class="stat-label">Amazon Ops</span>
-                                <span class="stat-value">Lvl 95</span>
+            <div class="card-wrapper">
+                <div class="pointing-arrow">↓</div>
+                <a href="hybrid.html" class="character-card hybrid">
+                    <div class="card-content">
+                        <div class="photo-container">
+                            <img src="hybrid-photo.jpg" alt="The Hybrid">
+                        </div>
+                        
+                        <h2 class="card-title">The Hybrid</h2>
+                        <p class="card-subtitle">eCommerce Ops & AI Systems</p>
+                        <p class="card-description">
+                            Building systems that scale, learning automation that transforms
+                        </p>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-header">
+                                    <span class="stat-label">Amazon Ops</span>
+                                    <span class="stat-value">Lvl 95</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--progress: 95%;"></div>
+                                </div>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--progress: 95%;"></div>
+                            
+                            <div class="stat">
+                                <div class="stat-header">
+                                    <span class="stat-label">Automation</span>
+                                    <span class="stat-value">Lvl 75</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--progress: 75%;"></div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="stat">
-                            <div class="stat-header">
-                                <span class="stat-label">Automation</span>
-                                <span class="stat-value">Lvl 75</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--progress: 75%;"></div>
-                            </div>
-                        </div>
+                        <div class="learn-button">Learn About This Player</div>
                     </div>
-                    
-                    <p class="hover-hint">Click to enter →</p>
-                </div>
-            </a>
+                </a>
+            </div>
             
             <!-- The Human Card -->
-            <a href="human.html" class="character-card human">
-                <div class="card-content">
-                    <div class="photo-container">
-                        <img src="human-photo.jpg" alt="The Human">
-                    </div>
-                    
-                    <h2 class="card-title">The Human</h2>
-                    <p class="card-subtitle">Epiphanies & Random Thoughts</p>
-                    <p class="card-description">
-                        Sharing experiences, opinions, tutorials, and life reflections
-                    </p>
-                    
-                    <div class="stats">
-                        <div class="stat">
-                            <div class="stat-header">
-                                <span class="stat-label">Curiosity</span>
-                                <span class="stat-value">MAX</span>
+            <div class="card-wrapper">
+                <div class="pointing-arrow">↓</div>
+                <a href="human.html" class="character-card human">
+                    <div class="card-content">
+                        <div class="photo-container">
+                            <img src="human-photo.jpg" alt="The Human">
+                        </div>
+                        
+                        <h2 class="card-title">The Human</h2>
+                        <p class="card-subtitle">Epiphanies & Random Thoughts</p>
+                        <p class="card-description">
+                            Sharing experiences, opinions, tutorials, and life reflections
+                        </p>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-header">
+                                    <span class="stat-label">Curiosity</span>
+                                    <span class="stat-value">MAX</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--progress: 100%;"></div>
+                                </div>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--progress: 100%;"></div>
+                            
+                            <div class="stat">
+                                <div class="stat-header">
+                                    <span class="stat-label">Openness</span>
+                                    <span class="stat-value">Lvl 98</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--progress: 98%;"></div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="stat">
-                            <div class="stat-header">
-                                <span class="stat-label">Openness</span>
-                                <span class="stat-value">Lvl 98</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--progress: 98%;"></div>
-                            </div>
-                        </div>
+                        <div class="learn-button">Learn About This Player</div>
                     </div>
-                    
-                    <p class="hover-hint">Click to enter →</p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         
         <!-- Back link -->
