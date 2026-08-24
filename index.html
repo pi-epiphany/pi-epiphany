@@ -1,372 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pi-Epiphany | Welcome</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pi-Epiphany | Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0D1117;
+    --panel: #151B26;
+    --panel-border: #232B3A;
+    --text-main: #E8EBF0;
+    --text-dim: #8A93A6;
+    --blue: #4FA8FF;
+    --gold: #FFC93C;
+    --pink: #FF6FA5;
+    --green: #4ADE80;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height:100vh;
+  }
+  .pixel{ font-family:'Silkscreen', monospace; }
 
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #FFFFFF;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23B8956A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4V2'/%3E%3Cpath d='M15 16v-2'/%3E%3Cpath d='M8 9h2'/%3E%3Cpath d='M20 9h2'/%3E%3Cpath d='M17.8 11.8 19 13'/%3E%3Cpath d='M15 9h0'/%3E%3Cpath d='M17.8 6.2 19 5'/%3E%3Cpath d='m3 21 9-9'/%3E%3Cpath d='M12.2 6.2 11 5'/%3E%3C/svg%3E") 12 12, auto;
-        }
-        
-        /* Main container */
-        .welcome-container {
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            max-width: 900px;
-            padding: 2rem;
-        }
-        
-        /* Logo - Keep Allura */
-        .logo {
-            font-family: 'Allura', cursive;
-            font-size: 6.5rem;
-            background: linear-gradient(135deg, #9B8470 0%, #D4B896 50%, #B8956A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
-            filter: drop-shadow(0 4px 12px rgba(155, 132, 112, 0.3));
-        }
-        
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0);
-            }
-        }
-        
-        /* 3D white card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(201, 184, 168, 0.2);
-            padding: 5rem 3rem;
-            box-shadow: 
-                0 25px 70px rgba(45, 45, 45, 0.12),
-                0 8px 20px rgba(45, 45, 45, 0.08),
-                inset 0 1px 2px rgba(255, 255, 255, 0.9);
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
-            transform-style: preserve-3d;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(135deg, rgba(184, 149, 106, 0.05), rgba(155, 132, 112, 0.08));
-            border-radius: 24px;
-            z-index: -1;
-            filter: blur(8px);
-        }
-        
-        /* Modern AI sparkles with stars and diamonds */
-        .glitter-container {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        
-        /* Stars */
-        .star {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: linear-gradient(135deg, #F4E4C1, #D4B896);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            box-shadow: 0 0 12px rgba(244, 228, 193, 0.9);
-            animation: starFloat 6s ease-in-out infinite;
-            opacity: 0;
-        }
-        
-        @keyframes starFloat {
-            0%, 100% {
-                transform: translate(0, 0) scale(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-                transform: translate(var(--x1), var(--y1)) scale(1) rotate(45deg);
-            }
-            50% {
-                opacity: 0.9;
-                transform: translate(var(--x2), var(--y2)) scale(1.4) rotate(180deg);
-            }
-            90% {
-                opacity: 1;
-                transform: translate(var(--x3), var(--y3)) scale(1) rotate(315deg);
-            }
-            100% {
-                transform: translate(var(--x4), var(--y4)) scale(0) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Diamonds */
-        .diamond {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: linear-gradient(135deg, #F4E4C1 0%, #D4B896 100%);
-            transform: rotate(45deg);
-            box-shadow: 0 0 10px rgba(244, 228, 193, 0.8);
-            animation: diamondFloat 8s ease-in-out infinite;
-            opacity: 0;
-        }
-        
-        @keyframes diamondFloat {
-            0%, 100% {
-                transform: translate(0, 0) rotate(45deg) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-                transform: translate(var(--x1), var(--y1)) rotate(135deg) scale(1);
-            }
-            50% {
-                opacity: 0.9;
-                transform: translate(var(--x2), var(--y2)) rotate(225deg) scale(1.3);
-            }
-            90% {
-                opacity: 1;
-                transform: translate(var(--x3), var(--y3)) rotate(315deg) scale(1);
-            }
-            100% {
-                transform: translate(var(--x4), var(--y4)) rotate(405deg) scale(0);
-                opacity: 0;
-            }
-        }
-        
-        /* Sparkle positions - Mix of stars and diamonds */
-        .star:nth-child(1) { left: 15%; top: 20%; --x1: 10px; --y1: -15px; --x2: -8px; --y2: 20px; --x3: 12px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 0s; }
-        .diamond:nth-child(2) { left: 25%; top: 35%; --x1: -12px; --y1: 18px; --x2: 15px; --y2: -12px; --x3: -10px; --y3: 15px; --x4: 0px; --y4: 0px; animation-delay: 1s; }
-        .star:nth-child(3) { left: 70%; top: 25%; --x1: 15px; --y1: 20px; --x2: -10px; --y2: -15px; --x3: 12px; --y3: 18px; --x4: 0px; --y4: 0px; animation-delay: 2s; }
-        .diamond:nth-child(4) { left: 80%; top: 45%; --x1: -18px; --y1: -12px; --x2: 12px; --y2: 18px; --x3: -15px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 3s; }
-        .star:nth-child(5) { left: 20%; top: 65%; --x1: 12px; --y1: -18px; --x2: -15px; --y2: 12px; --x3: 10px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 4s; }
-        .diamond:nth-child(6) { left: 85%; top: 70%; --x1: -10px; --y1: 15px; --x2: 18px; --y2: -10px; --x3: -12px; --y3: 12px; --x4: 0px; --y4: 0px; animation-delay: 5s; }
-        .star:nth-child(7) { left: 45%; top: 15%; --x1: 8px; --y1: 20px; --x2: -12px; --y2: -18px; --x3: 15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 0.5s; }
-        .diamond:nth-child(8) { left: 60%; top: 80%; --x1: -15px; --y1: -10px; --x2: 10px; --y2: 15px; --x3: -12px; --y3: -8px; --x4: 0px; --y4: 0px; animation-delay: 1.5s; }
-        .star:nth-child(9) { left: 35%; top: 55%; --x1: 18px; --y1: -15px; --x2: -8px; --y2: 12px; --x3: 10px; --y3: -10px; --x4: 0px; --y4: 0px; animation-delay: 2.5s; }
-        .diamond:nth-child(10) { left: 50%; top: 40%; --x1: -12px; --y1: 12px; --x2: 15px; --y2: -15px; --x3: -10px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 3.5s; }
-        .star:nth-child(11) { left: 10%; top: 50%; --x1: 15px; --y1: -12px; --x2: -10px; --y2: 18px; --x3: 12px; --y3: -15px; --x4: 0px; --y4: 0px; animation-delay: 4.5s; }
-        .diamond:nth-child(12) { left: 90%; top: 30%; --x1: -10px; --y1: 15px; --x2: 12px; --y2: -12px; --x3: -15px; --y3: 10px; --x4: 0px; --y4: 0px; animation-delay: 5.5s; }
-        
-        /* Welcome text - Dark Maroon */
-        .welcome-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.5rem;
-            color: #5C2E2E;
-            margin-bottom: 2rem;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 1s forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Typing text - Dark Maroon */
-        .typing-container {
-            min-height: 80px;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .typing-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.5rem;
-            color: #5C2E2E;
-            line-height: 1.8;
-            display: inline;
-            font-weight: 400;
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.5rem;
-            background: #5C2E2E;
-            margin-left: 3px;
-            animation: blink 0.7s infinite;
-            vertical-align: bottom;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        /* Premium button with press effect */
-        .enter-button {
-            display: inline-block;
-            padding: 1.1rem 2.5rem;
-            background: linear-gradient(135deg, #9B8470 0%, #B8956A 50%, #A08060 100%);
-            color: #FAF8F3;
-            text-decoration: none;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            box-shadow: 
-                0 12px 35px rgba(155, 132, 112, 0.4),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 3.5s forwards;
-            position: relative;
-            z-index: 2;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-        }
-        
-        .enter-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .enter-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                0 16px 45px rgba(155, 132, 112, 0.6),
-                inset 0 2px 4px rgba(255, 255, 255, 0.4);
-        }
-        
-        .enter-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .enter-button:active {
-            transform: translateY(1px) scale(0.98);
-            box-shadow: 
-                0 4px 15px rgba(155, 132, 112, 0.3),
-                inset 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 4rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .glass-card {
-                padding: 4rem 2rem;
-            }
-            
-            .welcome-text {
-                font-size: 1.2rem;
-            }
-            
-            .typing-text {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+  /* subtle pixel-grid background texture */
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 1.2rem 2.5rem;
+    border-bottom: 1px solid var(--panel-border);
+    position:relative; z-index:2;
+  }
+  .logo{
+    font-size:1.1rem;
+    color: var(--text-main);
+    letter-spacing: 1px;
+  }
+  .logo span{ color: var(--gold); }
+  .nav-links{ display:flex; gap:0.75rem; font-size:0.85rem; color: var(--text-dim); }
+  .nav-links a{
+    color: var(--text-main);
+    text-decoration:none;
+    background: rgba(79,168,255,0.10);
+    border: 1px solid rgba(79,168,255,0.45);
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    font-family:'Silkscreen', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(79,168,255,0.15);
+  }
+  .nav-links a:hover{ color: var(--bg); background: var(--gold); border-color: var(--gold); box-shadow: 0 0 16px rgba(255,201,60,0.5); }
+
+  .wrap{
+    max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem;
+    display:grid; grid-template-columns: 1fr 340px; gap: 2rem;
+    position:relative; z-index:2;
+  }
+
+  /* PROFILE CARD */
+  .profile-card{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 2rem;
+    display:flex; gap:1.5rem; align-items:center;
+    margin-bottom: 2rem;
+  }
+  /* PIXEL ISLAND AVATAR — animated, no photo frame */
+  .avatar-wrap{ position:relative; flex-shrink:0; }
+  .avatar{
+    width: 190px; height: 140px;
+    flex-shrink:0;
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    border-radius: 10px;
+    overflow:hidden;
+    background: linear-gradient(180deg, #1C6FBF 0%, #1C6FBF 46%, #E8C27A 46%, #E8C27A 100%);
+    clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+    box-shadow: 0 0 0 3px var(--panel), 0 0 0 4px var(--panel-border);
+  }
+  .island-scene{
+    width: 100%; height: 100%;
+    image-rendering: pixelated;
+  }
+  .island-scene .fronds{ animation: frond-sway 2.4s ease-in-out infinite; transform-origin: 32px 9px; }
+  .island-scene .laptop-glow{ animation: glow-pulse 1.8s ease-in-out infinite; }
+  .island-scene .waves{ animation: wave-shimmer 2.2s ease-in-out infinite; }
+  @keyframes frond-sway{
+    0%,100%{ transform: rotate(-3deg); }
+    50%{ transform: rotate(3deg); }
+  }
+  @keyframes glow-pulse{
+    0%,100%{ opacity:0.75; }
+    50%{ opacity:1; }
+  }
+  @keyframes wave-shimmer{
+    0%,100%{ opacity:0.5; }
+    50%{ opacity:0.9; }
+  }
+  .kumusta{
+    position:absolute; top:-16px; left:10px;
+    background: var(--panel);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family:'Silkscreen', monospace;
+    font-size: 0.65rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    white-space:nowrap;
+    animation: kumusta-bob 2.6s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(255,201,60,0.3);
+    z-index:4;
+  }
+  .kumusta::after{
+    content:'';
+    position:absolute; bottom:-6px; left:14px;
+    border-width:6px 6px 0 0;
+    border-style:solid;
+    border-color: var(--gold) transparent transparent transparent;
+  }
+  @keyframes kumusta-bob{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-3px); }
+  }
+  .profile-info h1{
+    font-family:'Silkscreen', monospace;
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+  }
+  .profile-info .role{ color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.6rem; }
+  .level-badge{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    background: rgba(255,201,60,0.12);
+    color: var(--gold);
+    border: 1px solid rgba(255,201,60,0.3);
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-family:'Silkscreen', monospace;
+  }
+
+  /* SECTION LABEL */
+  .section-label{
+    font-family:'Silkscreen', monospace;
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* PATH CARDS (replaces Hybrid/Human split) */
+  .path-cards{ display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .path-card{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    text-decoration:none;
+    color: var(--text-main);
+    display:block;
+    transition: all 0.2s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .path-card:hover{ border-color: var(--blue); transform: translateY(-3px); }
+  .path-tag{
+    font-family:'Silkscreen', monospace;
+    font-size: 0.7rem;
+    color: var(--bg);
+    background: var(--blue);
+    display:inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  .path-card.human .path-tag{ background: var(--pink); }
+  .path-card h3{ font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .path-card p{ color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; }
+  .progress-track{ height: 6px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow:hidden; margin-bottom: 0.4rem; }
+  .progress-fill{ height: 100%; background: var(--blue); border-radius: 4px; }
+  .path-card.human .progress-fill{ background: var(--pink); }
+  .progress-label{ font-size: 0.75rem; color: var(--text-dim); font-family:'Silkscreen', monospace; }
+  .enter-arrow{
+    position:absolute; bottom:1.5rem; right:1.5rem;
+    color: var(--text-dim); font-size:1.2rem;
+    transition: all 0.2s;
+  }
+  .path-card:hover .enter-arrow{ color: var(--blue); transform: translateX(4px); }
+  .path-card.human:hover .enter-arrow{ color: var(--pink); }
+
+  /* STAT GRID */
+  .stat-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 2.5rem; }
+  .stat-box{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align:center;
+  }
+  .stat-box .num{ font-family:'Silkscreen', monospace; font-size: 1.5rem; color: var(--gold); }
+  .stat-box .label{ font-size: 0.75rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+  /* TESTIMONIAL STRIP */
+  .testimonial-card{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .testimonial-card b{ color: var(--text-main); font-family:'Silkscreen', monospace; font-size:0.75rem; display:block; margin-top:0.7rem; }
+
+  /* SIDEBAR */
+  .sidebar-card{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .sidebar-card h4{ font-family:'Silkscreen', monospace; font-size: 0.85rem; margin-bottom: 1rem; color: var(--text-main); }
+  .badge-list{ display:flex; flex-wrap:wrap; gap: 0.5rem; }
+  .badge{
+    background: rgba(79,168,255,0.1);
+    color: var(--blue);
+    border: 1px solid rgba(79,168,255,0.25);
+    font-size: 0.78rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+  }
+  .cta-btn{
+    display:block; text-align:center;
+    background: var(--gold);
+    color: #0D1117;
+    font-family:'Silkscreen', monospace;
+    font-size: 0.85rem;
+    padding: 0.9rem;
+    border-radius: 8px;
+    text-decoration:none;
+    margin-top: 0.5rem;
+  }
+  .cta-btn.secondary{
+    background:transparent; border: 1px solid var(--panel-border); color: var(--text-main);
+  }
+
+  footer{ text-align:center; padding: 3rem 0 1.5rem; color: var(--text-dim); font-size: 0.8rem; display:flex; align-items:center; justify-content:center; gap:0.5rem; }
+  .mango-icon{ image-rendering: pixelated; width:16px; height:16px; }
+
+  @media (max-width: 900px){
+    .wrap{ grid-template-columns: 1fr; }
+    .path-cards{ grid-template-columns: 1fr; }
+    .stat-grid{ grid-template-columns: repeat(2,1fr); }
+  }
+
+  /* MAGIC HOVER — sparkle + glow on every button/link */
+  .magic{ position:relative; isolation:isolate; transition: transform 0.18s ease, box-shadow 0.18s ease, text-shadow 0.18s ease, filter 0.18s ease; }
+  .nav-links a.magic:hover{ box-shadow: 0 0 16px rgba(255,201,60,0.6); transform: translateY(-1px); }
+  .cta-btn.magic:hover{ box-shadow: 0 0 0 2px rgba(255,201,60,0.5), 0 0 18px rgba(255,201,60,0.55); transform: translateY(-2px); filter: brightness(1.08); }
+  .cta-btn.secondary.magic:hover{ box-shadow: 0 0 0 2px rgba(79,168,255,0.5), 0 0 16px rgba(79,168,255,0.4); }
+  .path-card.magic:hover{ transform: translateY(-4px); box-shadow: 0 0 0 2px rgba(255,201,60,0.35), 0 10px 24px rgba(0,0,0,0.35), 0 0 22px rgba(255,201,60,0.25); }
+  .sparkle{
+    position:absolute; pointer-events:none; z-index:6;
+    font-family:'Silkscreen', monospace;
+    color: var(--gold);
+    font-size: 0.75rem;
+    animation: sparkle-pop 0.75s ease-out forwards;
+    text-shadow: 0 0 6px var(--gold);
+  }
+  @keyframes sparkle-pop{
+    0%{ opacity:0; transform: translateY(0) scale(0.4) rotate(0deg); }
+    25%{ opacity:1; transform: translateY(-6px) scale(1.1) rotate(12deg); }
+    100%{ opacity:0; transform: translateY(-24px) scale(0.5) rotate(28deg); }
+  }
+</style>
 </head>
 <body>
-    <!-- Main content -->
-    <div class="welcome-container">
-        <h1 class="logo">Pi-Epiphany</h1>
-        
-        <div class="glass-card">
-            <!-- Modern AI sparkles with stars and diamonds -->
-            <div class="glitter-container">
-                <div class="star"></div>
-                <div class="diamond"></div>
-                <div class="star"></div>
-                <div class="diamond"></div>
-                <div class="star"></div>
-                <div class="diamond"></div>
-                <div class="star"></div>
-                <div class="diamond"></div>
-                <div class="star"></div>
-                <div class="diamond"></div>
-                <div class="star"></div>
-                <div class="diamond"></div>
-            </div>
-            
-            <p class="welcome-text">Welcome to my digital home.</p>
-            
-            <div class="typing-container">
-                <span class="typing-text" id="typingText"></span>
-                <span class="cursor" id="cursor"></span>
-            </div>
-            
-            <a href="select.html" class="enter-button">Step Inside</a>
-        </div>
+
+<nav>
+  <div class="logo pixel">PI<span>·</span>EPIPHANY</div>
+  <div class="nav-links">
+    <a href="hybrid.html" class="magic">The Hybrid</a>
+    <a href="human.html" class="magic">The Human</a>
+    <a href="work.html" class="magic">Sample Work</a>
+    <a href="recs.html" class="magic">My Recs</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="main-col">
+
+    <div class="profile-card">
+      <div class="avatar-wrap">
+      <div class="avatar">
+        <svg class="island-scene" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+          <!-- sunset sky -->
+          <rect x="0" y="0" width="40" height="5" fill="#FF8FBE"/>
+          <rect x="0" y="5" width="40" height="4" fill="var(--gold)"/>
+          <rect x="0" y="9" width="40" height="5" fill="var(--blue)"/>
+          <!-- sea -->
+          <rect x="0" y="14" width="40" height="8" fill="#1C6FBF"/>
+          <g class="waves">
+            <rect x="3" y="16" width="3" height="1" fill="#7FC4FF"/>
+            <rect x="20" y="18" width="3" height="1" fill="#7FC4FF"/>
+            <rect x="34" y="16" width="3" height="1" fill="#7FC4FF"/>
+            <rect x="12" y="20" width="3" height="1" fill="#7FC4FF"/>
+          </g>
+          <!-- sand -->
+          <rect x="0" y="22" width="40" height="8" fill="#E8C27A"/>
+          <rect x="3" y="25" width="1" height="1" fill="#D9AE5E"/>
+          <rect x="25" y="27" width="1" height="1" fill="#D9AE5E"/>
+          <rect x="35" y="24" width="1" height="1" fill="#D9AE5E"/>
+
+          <!-- palm tree -->
+          <g>
+            <rect x="31" y="9" width="2" height="14" fill="#6B4226"/>
+            <rect x="31" y="12" width="2" height="1" fill="#54321C"/>
+            <rect x="31" y="16" width="2" height="1" fill="#54321C"/>
+            <rect x="31" y="20" width="2" height="1" fill="#54321C"/>
+            <rect x="30" y="9" width="1" height="1" fill="#4A2E18"/>
+            <rect x="33" y="9" width="1" height="1" fill="#4A2E18"/>
+            <g class="fronds">
+              <rect x="24" y="6" width="7" height="2" fill="var(--green)"/>
+              <rect x="30" y="3" width="2" height="6" fill="#2FAE68"/>
+              <rect x="33" y="5" width="7" height="2" fill="var(--green)"/>
+              <rect x="27" y="8" width="5" height="2" fill="#2FAE68"/>
+              <rect x="33" y="8" width="5" height="2" fill="var(--green)"/>
+            </g>
+          </g>
+
+          <g>
+            <!-- table -->
+            <rect x="21" y="21" width="9" height="1" fill="#8B5E34"/>
+            <rect x="22" y="22" width="1" height="4" fill="#6B4226"/>
+            <rect x="29" y="22" width="1" height="4" fill="#6B4226"/>
+            <!-- laptop keyboard on table -->
+            <rect x="23" y="19" width="6" height="2" fill="#1B2330"/>
+            <rect x="23" y="19" width="6" height="1" fill="#2B3547"/>
+            <!-- laptop screen bezel + glow -->
+            <rect x="24" y="12" width="5" height="7" fill="#0D1117"/>
+            <rect x="25" y="13" width="3" height="5" fill="#8FE3FF" class="laptop-glow"/>
+            <rect x="25" y="14" width="1" height="1" fill="#0D1117" opacity="0.4"/>
+            <rect x="26" y="15" width="2" height="1" fill="#0D1117" opacity="0.3"/>
+            <rect x="25" y="16" width="2" height="1" fill="#0D1117" opacity="0.3"/>
+          </g>
+
+          <g>
+            <!-- crossed legs (connects directly to torso, no gap) -->
+            <rect x="7" y="23" width="11" height="3" fill="#2B3547"/>
+            <rect x="9" y="23" width="7" height="1" fill="#374460"/>
+            <rect x="6" y="25" width="3" height="1" fill="#E7B58C"/>
+            <rect x="15" y="25" width="3" height="1" fill="#E7B58C"/>
+            <!-- torso / tank top -->
+            <rect x="10" y="17" width="6" height="6" fill="var(--pink)"/>
+            <!-- relaxed left arm -->
+            <rect x="8" y="19" width="2" height="4" fill="#E7B58C"/>
+            <!-- bent right arm raising mango juice -->
+            <rect x="15" y="16" width="2" height="3" fill="#E7B58C"/>
+            <!-- mango juice glass -->
+            <rect x="16" y="13" width="3" height="4" fill="#FFA23C"/>
+            <rect x="16" y="13" width="1" height="4" fill="#FFFFFF" opacity="0.3"/>
+            <rect x="16" y="12" width="3" height="1" fill="#FFD9A0"/>
+            <rect x="18" y="11" width="1" height="1" fill="#FFD166"/>
+            <rect x="17" y="8" width="1" height="5" fill="#F5EFE0"/>
+            <rect x="17" y="9" width="1" height="1" fill="var(--pink)" opacity="0.85"/>
+            <!-- neck -->
+            <rect x="12" y="15" width="2" height="2" fill="#E7B58C"/>
+            <!-- head -->
+            <rect x="10" y="10" width="6" height="5" fill="#E7B58C"/>
+            <rect x="10" y="8" width="6" height="2" fill="#3A2A20"/>
+            <rect x="9" y="10" width="1" height="4" fill="#3A2A20"/>
+            <rect x="16" y="10" width="1" height="4" fill="#3A2A20"/>
+            <rect x="15" y="7" width="2" height="2" fill="#3A2A20"/>
+            <!-- face -->
+            <rect x="11" y="12" width="1" height="1" fill="#20141A"/>
+            <rect x="14" y="12" width="1" height="1" fill="#20141A"/>
+            <rect x="11" y="13" width="1" height="1" fill="var(--pink)" opacity="0.55"/>
+            <rect x="14" y="13" width="1" height="1" fill="var(--pink)" opacity="0.55"/>
+            <rect x="12" y="14" width="2" height="1" fill="#B5654A"/>
+          </g>
+        </svg>
+      </div>
+        <span class="kumusta">Kumusta!</span>
+      </div>
+      <div class="profile-info">
+        <h1>Epiphany "Pi-e" Oliveros</h1>
+        <p class="role">eCommerce Ops &amp; AI Automation &middot; San Juan City, PH</p>
+        <span class="level-badge">★ LEVEL: FREELANCER</span>
+      </div>
     </div>
 
-    <script>
-        // Typing animation
-        const text = "Where systems meet stories, and curiosity leads the way.";
-        const typingElement = document.getElementById('typingText');
-        const cursor = document.getElementById('cursor');
-        let index = 0;
-        
-        function type() {
-            if (index < text.length) {
-                typingElement.textContent += text[index];
-                index++;
-                setTimeout(type, 80);
-            } else {
-                setTimeout(() => {
-                    cursor.style.display = 'none';
-                }, 500);
-            }
+    <div class="section-label">CHOOSE YOUR PATH</div>
+    <div class="path-cards">
+      <a href="hybrid.html" class="path-card hybrid magic">
+        <span class="path-tag">WORK MODE</span>
+        <h3>The Hybrid</h3>
+        <p>eCommerce ops, Amazon wholesale, and the AI automation systems I'm building on top of it.</p>
+        <div class="progress-track"><div class="progress-fill" style="width:85%"></div></div>
+        <div class="progress-label">Amazon Ops — Lvl 95</div>
+        <span class="enter-arrow">→</span>
+      </a>
+      <a href="human.html" class="path-card human magic">
+        <span class="path-tag">PERSONAL MODE</span>
+        <h3>The Human</h3>
+        <p>Honest reflections, lessons from reinventing a career, and everything that doesn't fit on a resume.</p>
+        <div class="progress-track"><div class="progress-fill" style="width:98%"></div></div>
+        <div class="progress-label">Curiosity — MAX</div>
+        <span class="enter-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="section-label">STATS</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="num pixel">13+</div><div class="label">Years Experience</div></div>
+      <div class="stat-box"><div class="num pixel">3+</div><div class="label">Years in Amazon Ops</div></div>
+      <div class="stat-box"><div class="num pixel">7-Fig</div><div class="label">Stores Managed</div></div>
+      <div class="stat-box"><div class="num pixel">4</div><div class="label">Client Reviews</div></div>
+    </div>
+
+    <div class="section-label">WHAT CLIENTS SAY</div>
+    <div class="testimonial-card">
+      "I just wanted to give you a bonus for all the great work you have done." Working with him for a year and a half taught me what consistent quality really means.
+      <b>— Yannick M., One2boom</b>
+    </div>
+    <div class="testimonial-card">
+      Highly competent, communicates clearly, and picks up new systems fast. I would not hesitate to recommend Epiphany.
+      <b>— Kyle M. &amp; Paul O., Prestara Ltd</b>
+    </div>
+    <div class="testimonial-card">
+      I had the pleasure of working with Epiphany as an AI automation architect trainee on my team, where she built and maintained automation workflows in n8n. What stood out was how quickly she picked things up, how cleanly she documented everything, and how dependable she was week to week. She brought a good attitude to every project and took real initiative, even standing up her own systems to stay organized. I recommend her without hesitation to anyone looking for solid, reliable automation work.
+      <b>— Devon J. Williams, Meta Know Labs</b>
+    </div>
+
+  </div>
+
+  <div class="side-col">
+    <div class="sidebar-card">
+      <h4>TOOLS &amp; BADGES</h4>
+      <div class="badge-list">
+        <span class="badge">n8n</span>
+        <span class="badge">Zapier</span>
+        <span class="badge">Keepa</span>
+        <span class="badge">GoHighLevel</span>
+        <span class="badge">Jungle Scout</span>
+        <span class="badge">Notion</span>
+        <span class="badge">Amazon</span>
+      </div>
+    </div>
+    <div class="sidebar-card">
+      <h4>LET'S CONNECT</h4>
+      <a href="#" class="cta-btn magic">SAY HI ON LINKEDIN</a>
+      <a href="#" class="cta-btn secondary magic">SEND AN EMAIL</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <svg class="mango-icon" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="0" width="1" height="1" fill="#4ADE80"/>
+    <rect x="3" y="1" width="2" height="1" fill="#4ADE80"/>
+    <rect x="2" y="2" width="1" height="1" fill="#FFC93C"/>
+    <rect x="3" y="2" width="3" height="1" fill="#FFC93C"/>
+    <rect x="1" y="3" width="1" height="1" fill="#FFC93C"/>
+    <rect x="2" y="3" width="4" height="1" fill="#FFA83C"/>
+    <rect x="6" y="3" width="1" height="1" fill="#FFC93C"/>
+    <rect x="1" y="4" width="6" height="1" fill="#FFA83C"/>
+    <rect x="1" y="5" width="6" height="1" fill="#FFA83C"/>
+    <rect x="2" y="6" width="4" height="1" fill="#FFC93C"/>
+    <rect x="3" y="7" width="2" height="1" fill="#FFC93C"/>
+  </svg>
+  &copy; 2026 Pi-Epiphany. Built with curiosity, systems, and mango shake.
+</footer>
+
+<script>
+  (function(){
+    var glyphs = ['✦','✧','⋆','·','✷'];
+    document.querySelectorAll('.magic').forEach(function(el){
+      el.addEventListener('mouseenter', function(){
+        var count = 4 + Math.floor(Math.random()*2);
+        for(var i=0;i<count;i++){
+          (function(){
+            var s = document.createElement('span');
+            s.className = 'sparkle';
+            s.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+            s.style.left = (Math.random()*90)+'%';
+            s.style.top = (Math.random()*70)+'%';
+            s.style.animationDelay = (Math.random()*0.18)+'s';
+            el.appendChild(s);
+            setTimeout(function(){ s.remove(); }, 900);
+          })();
         }
-        
-        setTimeout(type, 1500);
-    </script>
+      });
+    });
+  })();
+</script>
 </body>
 </html>
