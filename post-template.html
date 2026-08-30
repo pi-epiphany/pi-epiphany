@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================
+  STEP 1: Change the title below.
+  This is what shows in the browser tab and in search results.
+============================================= -->
+<title>Your Post Title Here | Epiphany Oliveros</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #17130F;
+    --panel: #201A14;
+    --panel-border: #362C20;
+    --text-main: #F5EFE4;
+    --text-dim: #A99A87;
+    --gold: #E8B84B;
+    --gold-bright: #F3CD70;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.7;
+  }
+  a{ color: inherit; }
+
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 1.6rem 3.5rem;
+  }
+  .logo{ font-weight:700; font-size:1.05rem; letter-spacing:0.5px; text-decoration:none; color:var(--text-main); }
+  .logo span{ color: var(--gold); }
+  .back-link{ text-decoration:none; color: var(--text-dim); font-size:0.9rem; font-weight:500; }
+  .back-link:hover{ color: var(--text-main); }
+
+  .wrap{ max-width: 720px; margin:0 auto; padding: 2rem 2rem 5rem; }
+
+  .eyebrow{ font-size:0.75rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color: var(--gold); margin-bottom: 1rem; }
+
+  /* ============================================
+     STEP 2: Change the H1 below to your post's title.
+  ============================================= */
+  h1{
+    font-family:'Fraunces', serif; font-weight:600; font-size: 2.3rem;
+    line-height:1.15; margin-bottom: 0.8rem; letter-spacing:-0.5px;
+  }
+
+  .post-meta{ color: var(--text-dim); font-size:0.88rem; margin-bottom: 2.5rem; }
+
+  /* Featured image at the top of the post */
+  .featured-img{
+    width:100%; border-radius:14px; overflow:hidden;
+    margin-bottom: 2.5rem; border:1px solid var(--panel-border);
+  }
+  .featured-img img{ width:100%; display:block; }
+
+  article p{ color: var(--text-dim); font-size:1.05rem; margin-bottom: 1.3rem; max-width: 68ch; }
+  article h2{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.5rem;
+    color: var(--text-main); margin: 2.5rem 0 1rem;
+  }
+
+  /* Photo dropped inside the writing, with an optional caption underneath */
+  figure{ margin: 2rem 0; }
+  figure img{ width:100%; border-radius:12px; border:1px solid var(--panel-border); display:block; }
+  figcaption{ color: var(--text-dim); font-size:0.85rem; margin-top:0.6rem; font-style:italic; }
+
+  blockquote{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    font-size: 1.35rem; line-height:1.5; color: var(--text-main);
+    border-left: 2px solid var(--gold);
+    padding: 0.3rem 0 0.3rem 1.4rem;
+    margin: 2rem 0;
+  }
+
+  footer{
+    border-top: 1px solid var(--panel-border);
+    padding: 2.5rem 3.5rem 2rem;
+    color: var(--text-dim); font-size: 0.85rem;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">PI<span>·</span>EPIPHANY</a>
+  <a href="notes.html" class="back-link">← Back to Notes</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============================================
+    STEP 3: Change the eyebrow label (a short category, e.g. "Automation" or "Reflections")
+  ============================================= -->
+  <div class="eyebrow">Notes</div>
+
+  <!-- STEP 4: your post title again, this time as the big headline -->
+  <h1>Your Post Title Here</h1>
+
+  <!-- STEP 5: date + optional read time -->
+  <div class="post-meta">Month Day, Year</div>
+
+  <!-- ============================================
+    STEP 6 (OPTIONAL): Featured photo at the top of the post.
+    Replace "images/your-photo.jpg" with your real filename.
+    Upload the photo into your /images/ folder first, same as you did for your profile photo.
+    Delete this whole <div class="featured-img">...</div> block if you don't want a top photo.
+  ============================================= -->
+  <div class="featured-img">
+    <img src="images/your-photo.jpg" alt="Describe the photo here">
+  </div>
+
+  <article>
+
+    <!-- ============================================
+      STEP 7: Write your post below. Each paragraph goes in its own <p>...</p> tag.
+      Just duplicate the <p> line for each new paragraph.
+    ============================================= -->
+    <p>Start writing your first paragraph here. This is just normal text — write like you're talking to a friend.</p>
+
+    <p>Second paragraph goes here.</p>
+
+    <!-- ============================================
+      OPTIONAL: to add a subheading partway through the post, use this:
+      <h2>Your Subheading</h2>
+    ============================================= -->
+
+    <!-- ============================================
+      OPTIONAL: to drop in a photo INSIDE the post (like your beach photo idea),
+      copy this whole <figure> block and paste it wherever you want the photo to appear.
+      - Change "images/beach-working.jpg" to your real uploaded filename
+      - The <figcaption> line underneath is optional — delete it if you don't want a caption
+    ============================================= -->
+    <figure>
+      <img src="images/beach-working.jpg" alt="Describe the photo here">
+      <figcaption>Optional caption — e.g. "Working from the beach, Zambales, 2026"</figcaption>
+    </figure>
+
+    <p>Keep writing more paragraphs after the photo, same as before.</p>
+
+    <!-- ============================================
+      OPTIONAL: to pull out a quote or a line you want to stand out, use this:
+      <blockquote>Your standout line here.</blockquote>
+    ============================================= -->
+
+  </article>
+
+</div>
+
+<footer>
+  &copy; 2026 Pi-Epiphany. Made with curiosity and probably a mango shake. 🥭
+</footer>
+
+</body>
+</html>
