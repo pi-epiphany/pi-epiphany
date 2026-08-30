@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes | Epiphany Oliveros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #17130F;
+    --panel: #201A14;
+    --panel-border: #362C20;
+    --text-main: #F5EFE4;
+    --text-dim: #A99A87;
+    --gold: #E8B84B;
+    --gold-bright: #F3CD70;
+    --green: #4ADE80;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.65;
+    overflow-x:hidden;
+  }
+  a{ color: inherit; }
+
+  .glow{ position:fixed; z-index:0; pointer-events:none; border-radius:50%; filter: blur(90px); opacity:0.5; }
+  .glow-1{ width:520px; height:520px; top:-180px; right:-120px; background: radial-gradient(circle, rgba(232,184,75,0.18), transparent 70%); }
+  .glow-2{ width:420px; height:420px; bottom:10%; left:-160px; background: radial-gradient(circle, rgba(232,184,75,0.08), transparent 70%); }
+
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 1.6rem 3.5rem; position:relative; z-index:2;
+  }
+  .logo{ font-weight:700; font-size:1.05rem; letter-spacing:0.5px; text-decoration:none; color:var(--text-main); }
+  .logo span{ color: var(--gold); }
+  .nav-links{ display:flex; gap:2.4rem; font-size:0.92rem; }
+  .nav-links a{
+    text-decoration:none; color: var(--text-dim); font-weight:500;
+    padding-bottom:2px; border-bottom:1px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .nav-links a:hover, .nav-links a.active{ color: var(--text-main); border-color: var(--gold); }
+
+  .wrap{ max-width: 1040px; margin:0 auto; padding: 0 3.5rem; position:relative; z-index:2; }
+
+  .reveal{ opacity:0; transform: translateY(16px); animation: rise 0.8s cubic-bezier(.2,.7,.3,1) forwards; }
+  .reveal.d1{ animation-delay: .05s; }
+  .reveal.d2{ animation-delay: .16s; }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+
+  .page-head{ padding: 4.5rem 0 3.5rem; }
+  .eyebrow{ font-size:0.75rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .page-head h1{ font-family:'Fraunces', serif; font-weight:600; font-size: 2.5rem; margin-bottom: 1.1rem; letter-spacing:-0.5px; }
+  .page-head p{ color: var(--text-dim); font-size: 1.05rem; max-width: 62ch; margin-bottom: 1.1rem; }
+  .page-head p:last-child{ margin-bottom:0; }
+  .page-head p.lead{ font-size: 1.15rem; color: var(--text-main); }
+
+  section{ padding: 3rem 0; border-top: 1px solid var(--panel-border); }
+
+  .blog-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.5rem; }
+  .blog-card{
+    display:block; text-decoration:none; color:inherit;
+    background: linear-gradient(180deg, var(--panel), rgba(32,26,20,0.4));
+    border: 1px solid var(--panel-border); border-radius: 16px;
+    padding: 1.8rem;
+    transition: transform .25s cubic-bezier(.2,.7,.3,1), border-color .25s ease;
+  }
+  .blog-card:hover{ transform: translateY(-4px); border-color: rgba(232,184,75,0.35); }
+  .blog-icon{ font-size:1.4rem; margin-bottom:1rem; }
+  .blog-card h3{ font-family:'Fraunces', serif; font-weight:600; font-size:1.1rem; margin-bottom:0.6rem; }
+  .blog-card p{ color: var(--text-dim); font-size:0.88rem; line-height:1.6; }
+
+  .coming-note{
+    border: 1px dashed var(--panel-border); border-radius: 12px;
+    padding: 1.6rem 1.8rem; color: var(--text-dim); font-size: 0.95rem;
+  }
+  .coming-note b{ color: var(--gold); font-weight:600; }
+
+  .say-hi{
+    display:inline-block; text-decoration:none; margin-top:1.2rem;
+    padding: 0.85rem 1.5rem; border-radius: 10px;
+    font-size:0.94rem; font-weight:600;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color:#1C1608;
+    box-shadow: 0 8px 24px -8px rgba(232,184,75,0.5);
+    transition: transform .2s cubic-bezier(.2,.7,.3,1), box-shadow .2s ease;
+  }
+  .say-hi:hover{ transform: translateY(-2px); box-shadow: 0 12px 30px -8px rgba(232,184,75,0.65); }
+
+  footer{
+    border-top: 1px solid var(--panel-border);
+    padding: 3rem 3.5rem 2.2rem;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+    color: var(--text-dim); font-size: 0.85rem;
+    position:relative; z-index:2;
+  }
+  .footer-links{ display:flex; gap:1.7rem; }
+  .footer-links a{ color: var(--text-dim); text-decoration:none; }
+  .footer-links a:hover{ color: var(--text-main); }
+
+  @media (max-width: 720px){
+    nav, footer{ padding-left:1.5rem; padding-right:1.5rem; }
+    .wrap{ padding: 0 1.5rem; }
+    .page-head h1{ font-size:1.9rem; }
+    .blog-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<nav>
+  <a href="index.html" class="logo">PI<span>·</span>EPIPHANY</a>
+  <div class="nav-links">
+    <a href="work.html">Work</a>
+    <a href="recs.html">Recs</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-head reveal d1">
+    <div class="eyebrow">Notes</div>
+    <h1>A little more about me</h1>
+    <p class="lead">This is where I step away from the polished portfolio and share what really happens behind the scenes — the lessons that don't fit neatly into a resume, the struggles, the small wins that don't make it to LinkedIn.</p>
+    <p>I'm upskilling into AI automation while managing eCommerce operations. Learning alongside people half my age, making mistakes, and figuring out how to bridge what I know with what I'm trying to build.</p>
+    <p>Here, I share what I'm actually learning: tutorials, reflections on work and growth, and honest thoughts about reinventing yourself when you're supposed to have it all figured out.</p>
+    <p>This is messy, honest, and human. Just me, figuring it out as I go.</p>
+  </div>
+
+  <section class="reveal d2">
+    <div class="eyebrow">Recent Thoughts</div>
+    <div class="blog-grid">
+      <a href="post-working-from-the-beach.html" class="blog-card">
+        <div class="blog-icon">🏖️</div>
+        <h3>Working From the Beach (Sort Of)</h3>
+        <p>One of the best islands in the Philippines, a mango shake, and a wifi signal that had other plans.</p>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-icon">🤍</div>
+        <h3>Why eCommerce Taught Me About Life</h3>
+        <p>Lessons in systems, resilience, and unexpected growth from managing online businesses.</p>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-icon">☕</div>
+        <h3>The Coffee Shop Chronicles</h3>
+        <p>Real conversations and observations from local cafes that changed my perspective.</p>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-icon">📖</div>
+        <h3>Learning by Doing</h3>
+        <p>My authentic journey into automation. The wins, the mistakes, and everything between.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">What's Coming</div>
+    <div class="coming-note">
+      <b>More on the way.</b> Tutorials, guides, and maybe some products in the future. For now, I'm focused on sharing authentic learning. This space will grow as I grow.
+    </div>
+    <a href="mailto:hello@pi-epiphany.com" class="say-hi">Say hi</a>
+  </section>
+</div>
+
+<footer>
+  <div>&copy; 2026 Pi-Epiphany. Made with curiosity and probably a mango shake. 🥭</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="recs.html">Recs</a>
+  </div>
+</footer>
+
+</body>
+</html>
