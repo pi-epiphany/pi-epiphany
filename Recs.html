@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recs | Epiphany Oliveros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #17130F;
+    --panel: #201A14;
+    --panel-border: #362C20;
+    --text-main: #F5EFE4;
+    --text-dim: #A99A87;
+    --gold: #E8B84B;
+    --gold-bright: #F3CD70;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.65;
+    overflow-x:hidden;
+  }
+  a{ color: inherit; }
+
+  .glow{ position:fixed; z-index:0; pointer-events:none; border-radius:50%; filter: blur(90px); opacity:0.5; }
+  .glow-1{ width:520px; height:520px; top:-180px; right:-120px; background: radial-gradient(circle, rgba(232,184,75,0.18), transparent 70%); }
+  .glow-2{ width:420px; height:420px; bottom:10%; left:-160px; background: radial-gradient(circle, rgba(232,184,75,0.08), transparent 70%); }
+
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 1.6rem 3.5rem; position:relative; z-index:2;
+  }
+  .logo{ font-weight:700; font-size:1.05rem; letter-spacing:0.5px; text-decoration:none; color:var(--text-main); }
+  .logo span{ color: var(--gold); }
+  .nav-links{ display:flex; gap:2.4rem; font-size:0.92rem; }
+  .nav-links a{
+    text-decoration:none; color: var(--text-dim); font-weight:500;
+    padding-bottom:2px; border-bottom:1px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .nav-links a:hover, .nav-links a.active{ color: var(--text-main); border-color: var(--gold); }
+
+  .wrap{ max-width: 1040px; margin:0 auto; padding: 0 3.5rem; position:relative; z-index:2; }
+
+  .reveal{ opacity:0; transform: translateY(16px); animation: rise 0.8s cubic-bezier(.2,.7,.3,1) forwards; }
+  .reveal.d1{ animation-delay: .05s; }
+  .reveal.d2{ animation-delay: .16s; }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+
+  .page-head{ padding: 4.5rem 0 2.5rem; }
+  .eyebrow{ font-size:0.75rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .page-head h1{ font-family:'Fraunces', serif; font-weight:600; font-size: 2.5rem; margin-bottom: 0.9rem; letter-spacing:-0.5px; }
+  .page-head p{ color: var(--text-dim); font-size: 1.05rem; max-width: 60ch; }
+
+  .disclosure{
+    border: 1px dashed var(--panel-border); border-radius: 12px;
+    padding: 1rem 1.4rem; color: var(--text-dim); font-size: 0.85rem;
+    margin-top: 1.6rem; max-width: 60ch;
+  }
+  .disclosure b{ color: var(--gold); font-weight:600; }
+
+  .filter-row{ display:flex; gap:0.7rem; flex-wrap:wrap; padding: 2rem 0 1rem; }
+  .filter-btn{
+    background:none; border: 1px solid var(--panel-border); color: var(--text-dim);
+    font-family:'Space Grotesk', sans-serif; font-size:0.85rem; font-weight:500;
+    padding: 0.5rem 1.1rem; border-radius: 20px; cursor:pointer;
+    transition: border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .filter-btn:hover{ color: var(--text-main); border-color: var(--gold); }
+  .filter-btn.active{ background: var(--gold); border-color: var(--gold); color:#1C1608; }
+
+  .rec-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; padding: 1.5rem 0 4rem; }
+  .rec-card{
+    background: linear-gradient(180deg, var(--panel), rgba(32,26,20,0.4));
+    border: 1px solid var(--panel-border); border-radius: 16px;
+    padding: 1.7rem;
+    transition: transform .25s cubic-bezier(.2,.7,.3,1), border-color .25s ease;
+  }
+  .rec-card:hover{ transform: translateY(-4px); border-color: rgba(232,184,75,0.35); }
+  .rec-cat{
+    font-size: 0.7rem; font-weight:600; letter-spacing:0.5px;
+    color: var(--gold); background: rgba(232,184,75,0.1); border: 1px solid rgba(232,184,75,0.25);
+    display:inline-block; padding: 0.22rem 0.6rem; border-radius: 5px; margin-bottom: 0.9rem;
+  }
+  .rec-card h3{ font-family:'Fraunces', serif; font-weight:600; font-size: 1.15rem; margin-bottom: 0.7rem; }
+  .rec-why{
+    font-size: 0.9rem; color: var(--text-dim); line-height:1.6;
+    border-left: 2px solid var(--gold); padding-left: 0.9rem; margin-bottom: 1.2rem;
+  }
+  .rec-why b{ color: var(--text-main); font-weight:600; }
+  .rec-link{
+    display:inline-block; font-size:0.85rem; font-weight:600; color: var(--gold);
+    text-decoration:none; border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+  .rec-link:hover{ border-color: var(--gold); }
+
+  .placeholder-note{
+    border: 1px dashed var(--panel-border); border-radius: 12px;
+    padding: 1.3rem 1.6rem; color: var(--text-dim); font-size: 0.88rem; margin-bottom: 4rem;
+  }
+  .placeholder-note b{ color: var(--gold); font-weight:600; }
+
+  footer{
+    border-top: 1px solid var(--panel-border);
+    padding: 3rem 3.5rem 2.2rem;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+    color: var(--text-dim); font-size: 0.85rem;
+    position:relative; z-index:2;
+  }
+  .footer-links{ display:flex; gap:1.7rem; }
+  .footer-links a{ color: var(--text-dim); text-decoration:none; }
+  .footer-links a:hover{ color: var(--text-main); }
+
+  @media (max-width: 720px){
+    nav, footer{ padding-left:1.5rem; padding-right:1.5rem; }
+    .wrap{ padding: 0 1.5rem; }
+    .page-head h1{ font-size:1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<nav>
+  <a href="index.html" class="logo">PI<span>·</span>EPIPHANY</a>
+  <div class="nav-links">
+    <a href="work.html">Work</a>
+    <a href="recs.html" class="active">Recs</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-head reveal d1">
+    <div class="eyebrow">Recommendations</div>
+    <h1>Things I actually use</h1>
+    <p>Work tools, everyday finds, and gadgets I've picked up along the way. Nothing here made the list just because it pays a commission. If I recommend it, I use it.</p>
+    <div class="disclosure"><b>Heads up:</b> some links on this page are affiliate links. If you buy through them, I may earn a small commission at no extra cost to you.</div>
+  </div>
+
+  <div class="filter-row reveal d2">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="work">Work Tools</button>
+    <button class="filter-btn" data-filter="everyday">Everyday Finds</button>
+    <button class="filter-btn" data-filter="gadgets">Gadgets</button>
+  </div>
+
+  <div class="rec-grid reveal d2" id="recGrid">
+    <div class="rec-card" data-cat="work">
+      <span class="rec-cat">Work Tools</span>
+      <h3>Notion</h3>
+      <p class="rec-why"><b>Why I recommend it:</b> This is where I keep every client's tasks, notes, and workflows in one place. I genuinely couldn't manage multiple accounts without it.</p>
+      <a href="#" class="rec-link">See it →</a>
+    </div>
+    <div class="rec-card" data-cat="work">
+      <span class="rec-cat">Work Tools</span>
+      <h3>Noise-Cancelling Earbuds</h3>
+      <p class="rec-why"><b>Why I recommend it:</b> I'm on calls with clients across different time zones almost every day. These block out enough background noise that I can actually focus.</p>
+      <a href="#" class="rec-link">See it →</a>
+    </div>
+    <div class="rec-card" data-cat="everyday">
+      <span class="rec-cat">Everyday Finds</span>
+      <h3>Insulated Tumbler</h3>
+      <p class="rec-why"><b>Why I recommend it:</b> I basically live off mango shakes and iced coffee while I work. This keeps drinks cold for hours, even on a hot afternoon at the beach.</p>
+      <a href="#" class="rec-link">See it →</a>
+    </div>
+    <div class="rec-card" data-cat="everyday">
+      <span class="rec-cat">Everyday Finds</span>
+      <h3>Portable Desk Fan</h3>
+      <p class="rec-why"><b>Why I recommend it:</b> Philippine heat is no joke. This has saved me more than once when I'm working somewhere without good aircon.</p>
+      <a href="#" class="rec-link">See it →</a>
+    </div>
+    <div class="rec-card" data-cat="gadgets">
+      <span class="rec-cat">Gadgets</span>
+      <h3>Pocket Wifi</h3>
+      <p class="rec-why"><b>Why I recommend it:</b> After the wifi disaster from my beach-working post, I don't leave home without one of these anymore. Client work can't wait for bad signal.</p>
+      <a href="#" class="rec-link">See it →</a>
+    </div>
+    <div class="rec-card" data-cat="gadgets">
+      <span class="rec-cat">Gadgets</span>
+      <h3>Power Bank</h3>
+      <p class="rec-why"><b>Why I recommend it:</b> Long work days plus unreliable outlets means I always carry one of these. Cheap insurance against a dead laptop mid-task.</p>
+      <a href="#" class="rec-link">See it →</a>
+    </div>
+  </div>
+
+  <div class="placeholder-note">
+    <b>Note to self:</b> swap these in once Amazon Associates, Shopee, and Involve Asia links are approved. Each card can link to whichever platform the product is actually on.
+  </div>
+</div>
+
+<footer>
+  <div>&copy; 2026 Pi-Epiphany. Made with curiosity and probably a mango shake. 🥭</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="notes.html">Notes</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.rec-card').forEach(function(card){
+        if(filter === 'all' || card.dataset.cat === filter){
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
