@@ -79,9 +79,11 @@
   /* Ready for screenshots/case-study photos whenever you add them.
      Wrap any photo like this: <div class="img-frame"><img src="images/your-file.jpg" alt="..."></div>
      It automatically sizes it, shows the whole photo (no cropping), and adds
-     the small watermark in the corner — same as your Notes post photos. */
+     the small watermark in the corner — same as your Notes post photos.
+     Click any photo to view it full-size. */
   .img-frame{
     position:relative; width:fit-content; max-width:100%; margin:1rem 0; display:block;
+    cursor: zoom-in;
   }
   .img-frame img{
     max-width:100%; max-height:500px; width:auto; height:auto;
@@ -95,6 +97,33 @@
     text-shadow: 0 1px 4px rgba(0,0,0,0.65);
     pointer-events:none;
   }
+
+  /* GALLERY — for showing more than one photo side by side.
+     Wrap several .img-frame blocks in this to make them scroll sideways
+     instead of stacking. Swipeable on mobile, drag-scrollable on desktop. */
+  .img-gallery{
+    display:flex; gap:1rem; overflow-x:auto; padding-bottom:0.5rem;
+    -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory;
+  }
+  .img-gallery .img-frame{
+    flex:0 0 auto; scroll-snap-align:start; margin:1rem 0 0;
+  }
+  .img-gallery .img-frame img{ max-height:380px; }
+
+  /* LIGHTBOX — the full-size click-to-zoom view. No setup needed per photo,
+     this applies automatically to every .img-frame image on the page. */
+  #lightbox{
+    display:none; position:fixed; inset:0; z-index:50;
+    background: rgba(13,10,7,0.92);
+    align-items:center; justify-content:center;
+    padding: 2rem; cursor: zoom-out;
+  }
+  #lightbox.open{ display:flex; }
+  #lightbox img{
+    max-width:100%; max-height:100%; border-radius:8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
   .meta-tag{ border:1px solid var(--panel-border); color: var(--text-dim); font-size: 0.78rem; padding: 0.3rem 0.65rem; border-radius: 20px; }
 
   .placeholder-note{
@@ -148,13 +177,15 @@
     <div class="work-card">
       <span class="work-tag">Amazon Design</span>
       <h3>Amazon Brand Storefront Design</h3>
-      <p>Designed and built a full Amazon storefront for a UK tape and adhesives brand, from design plan to live build</p>
+      <p>Designed and built a full Amazon storefront for a UK tape and adhesives brand, from design plan to live build — banners, copy, product pages, and category layouts, everything created from scratch.</p>
       <div class="work-meta">
         <span class="meta-tag">Amazon Brand Store</span>
         <span class="meta-tag">A+ Content</span>
       </div>
-      <div class="img-frame" style="margin-top:1.3rem;"><img src="images/gladiator-store-wireframe.png" alt="Design plan for the Amazon storefront pages"></div>
-      <div class="img-frame" style="margin-top:1rem;"><img src="images/gladiator-store-live.jpg" alt="The completed, live Amazon storefront"></div>
+      <div class="img-gallery">
+        <div class="img-frame"><img src="images/gladiator-store-wireframe.png" alt="Design plan for the Amazon storefront pages"></div>
+        <div class="img-frame"><img src="images/gladiator-store-live.jpg" alt="The completed, live Amazon storefront"></div>
+      </div>
     </div>
     <div class="work-card">
       <span class="work-tag">Automation</span>
@@ -182,7 +213,7 @@
       <p>Set up automation workflows in Make for a former eCommerce client, working alongside an AI assistant for build, QA, and debugging.</p>
       <div class="work-meta">
         <span class="meta-tag">Make</span>
-        <span class="meta-tag">ChatGPT, Claude</span>
+        <span class="meta-tag">Claude</span>
       </div>
     </div>
   </div>
@@ -202,6 +233,26 @@
     <a href="recs.html">Recs</a>
   </div>
 </footer>
+
+<!-- LIGHTBOX — the full-size popup that shows when you click a photo -->
+<div id="lightbox"><img id="lightbox-img" src="" alt=""></div>
+
+<script>
+  (function(){
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.img-frame img').forEach(function(img){
+      img.addEventListener('click', function(){
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+    lightbox.addEventListener('click', function(){
+      lightbox.classList.remove('open');
+    });
+  })();
+</script>
 
 </body>
 </html>
