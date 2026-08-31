@@ -75,6 +75,26 @@
   .work-card h3{ font-family:'Fraunces', serif; font-weight:600; font-size: 1.25rem; margin-bottom: 0.7rem; }
   .work-card p{ color: var(--text-dim); font-size: 0.9rem; line-height:1.6; margin-bottom: 1.1rem; }
   .work-meta{ display:flex; gap:0.5rem; flex-wrap:wrap; }
+
+  /* Ready for screenshots/case-study photos whenever you add them.
+     Wrap any photo like this: <div class="img-frame"><img src="images/your-file.jpg" alt="..."></div>
+     It automatically sizes it, shows the whole photo (no cropping), and adds
+     the small watermark in the corner — same as your Notes post photos. */
+  .img-frame{
+    position:relative; width:fit-content; max-width:100%; margin:1rem 0; display:block;
+  }
+  .img-frame img{
+    max-width:100%; max-height:500px; width:auto; height:auto;
+    border-radius:12px; display:block;
+  }
+  .img-frame::after{
+    content:'pi-epiphany.com';
+    position:absolute; bottom:10px; right:12px;
+    font-family:'Space Grotesk', sans-serif; font-size:0.72rem; font-weight:600;
+    color: rgba(255,255,255,0.55); letter-spacing:0.4px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.65);
+    pointer-events:none;
+  }
   .meta-tag{ border:1px solid var(--panel-border); color: var(--text-dim); font-size: 0.78rem; padding: 0.3rem 0.65rem; border-radius: 20px; }
 
   .placeholder-note{
@@ -126,6 +146,17 @@
 
   <div class="work-grid reveal d2">
     <div class="work-card">
+      <span class="work-tag">Amazon Design</span>
+      <h3>Amazon Brand Storefront Design</h3>
+      <p>Designed and built a full Amazon storefront for a UK tape and adhesives brand, from design plan to live build</p>
+      <div class="work-meta">
+        <span class="meta-tag">Amazon Brand Store</span>
+        <span class="meta-tag">A+ Content</span>
+      </div>
+      <div class="img-frame" style="margin-top:1.3rem;"><img src="images/gladiator-store-wireframe.png" alt="Design plan for the Amazon storefront pages"></div>
+      <div class="img-frame" style="margin-top:1rem;"><img src="images/gladiator-store-live.jpg" alt="The completed, live Amazon storefront"></div>
+    </div>
+    <div class="work-card">
       <span class="work-tag">Automation</span>
       <h3>n8n Outreach Workflow</h3>
       <p>Built and maintained an end-to-end automation workflow for B2B practitioner outreach — from lead capture to CRM sync.</p>
@@ -151,7 +182,7 @@
       <p>Set up automation workflows in Make for a former eCommerce client, working alongside an AI assistant for build, QA, and debugging.</p>
       <div class="work-meta">
         <span class="meta-tag">Make</span>
-        <span class="meta-tag">ChatGPT, Claude</span>
+        <span class="meta-tag">Claude</span>
       </div>
     </div>
   </div>
@@ -167,7 +198,7 @@
   </div>
   <div class="footer-links">
     <a href="notes.html">Notes</a>
-    <a href="index.html">Home</a>
+    <a href="/">Home</a>
     <a href="recs.html">Recs</a>
   </div>
 </footer>
