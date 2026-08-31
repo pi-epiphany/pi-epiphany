@@ -56,12 +56,11 @@
   .post-meta{ color: var(--text-dim); font-size:0.88rem; margin-bottom: 2.5rem; }
 
   /* Featured image at the top of the post */
-  .featured-img{
-    width:100%; max-height:560px; border-radius:14px; overflow:hidden;
-    margin-bottom: 2.5rem; display:flex; align-items:center; justify-content:center;
-    background: var(--panel);
+  .featured-img{ margin-bottom: 2.5rem; }
+  .featured-img img{
+    max-width:100%; max-height:560px; width:auto; height:auto; margin:0 auto;
+    border-radius:14px; display:block;
   }
-  .featured-img img{ max-width:100%; max-height:560px; width:auto; height:auto; display:block; }
 
   article p{ color: var(--text-dim); font-size:1.05rem; margin-bottom: 1.3rem; max-width: 68ch; }
   article h2{
@@ -70,17 +69,15 @@
   }
 
   /* Photo dropped inside the writing, with an optional caption underneath.
-     Every post photo is capped at the same max size (never oversized), and
-     shows the WHOLE photo with nothing cropped off — no matter what size
-     or shape the original photo file is. */
-  figure{
-    margin: 2rem 0; width:100%; max-height:500px; border-radius:12px; overflow:hidden;
-    display:flex; align-items:center; justify-content:center; background: var(--panel);
-  }
+     Every post photo is capped at a max size (never oversized) and shows
+     the WHOLE photo with nothing cropped off — no matter what size or
+     shape the original photo file is. */
+  figure{ margin: 2rem 0; }
   figure img{
-    max-width:100%; max-height:500px; width:auto; height:auto; display:block;
+    max-width:100%; max-height:500px; width:auto; height:auto; margin:0 auto;
+    border-radius:12px; display:block;
   }
-  figcaption{ color: var(--text-dim); font-size:0.85rem; margin-top:0.6rem; font-style:italic; }
+  figcaption{ color: var(--text-dim); font-size:0.85rem; margin-top:0.6rem; font-style:italic; text-align:center; }
 
   blockquote{
     font-family:'Fraunces', serif; font-style:italic; font-weight:500;
