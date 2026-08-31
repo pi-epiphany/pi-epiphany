@@ -57,10 +57,10 @@
 
   /* Featured image at the top of the post */
   .featured-img{
-    width:100%; border-radius:14px; overflow:hidden;
-    margin-bottom: 2.5rem; border:1px solid var(--panel-border);
+    width:100%; aspect-ratio: 16/9; border-radius:14px; overflow:hidden;
+    margin-bottom: 2.5rem;
   }
-  .featured-img img{ width:100%; display:block; }
+  .featured-img img{ width:100%; height:100%; object-fit:cover; display:block; }
 
   article p{ color: var(--text-dim); font-size:1.05rem; margin-bottom: 1.3rem; max-width: 68ch; }
   article h2{
@@ -68,9 +68,14 @@
     color: var(--text-main); margin: 2.5rem 0 1rem;
   }
 
-  /* Photo dropped inside the writing, with an optional caption underneath */
+  /* Photo dropped inside the writing, with an optional caption underneath.
+     All post photos display at this same consistent size (4:3 box) —
+     no matter what size or shape the original photo file is. */
   figure{ margin: 2rem 0; }
-  figure img{ width:100%; border-radius:12px; border:1px solid var(--panel-border); display:block; }
+  figure img{
+    width:100%; aspect-ratio: 4/3; object-fit:cover;
+    border-radius:12px; display:block;
+  }
   figcaption{ color: var(--text-dim); font-size:0.85rem; margin-top:0.6rem; font-style:italic; }
 
   blockquote{
@@ -92,7 +97,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="logo">PI<span>·</span>EPIPHANY</a>
+  <a href="/" class="logo">PI<span>·</span>EPIPHANY</a>
   <a href="notes.html" class="back-link">← Back to Notes</a>
 </nav>
 
@@ -111,12 +116,12 @@
 
   <!-- ============================================
     STEP 6 (OPTIONAL): Featured photo at the top of the post.
-    Replace "your-photo.jpg" with your real filename.
-    Upload the photo straight into your repo (same place as your other files), same as you did for your profile photo.
+    Replace "your-photo.jpg" with your real filename (keep the "images/" part before it).
+    Upload the photo into your repo's "images" folder, same as you did for your profile photo.
     Delete this whole <div class="featured-img">...</div> block if you don't want a top photo.
   ============================================= -->
   <div class="featured-img">
-    <img src="your-photo.jpg" alt="Describe the photo here">
+    <img src="images/your-photo.jpg" alt="Describe the photo here">
   </div>
 
   <article>
@@ -137,15 +142,32 @@
     <!-- ============================================
       OPTIONAL: to drop in a photo INSIDE the post (like your beach photo idea),
       copy this whole <figure> block and paste it wherever you want the photo to appear.
-      - Change "beach-working.jpg" to your real uploaded filename
+      - Change "beach-working.jpg" to your real uploaded filename (keep the "images/" part before it)
       - The <figcaption> line underneath is optional — delete it if you don't want a caption
     ============================================= -->
     <figure>
-      <img src="beach-working.jpg" alt="Describe the photo here">
+      <img src="images/beach-working.jpg" alt="Describe the photo here">
       <figcaption>Optional caption — e.g. "Working from the beach, Zambales, 2026"</figcaption>
     </figure>
 
+    <!-- ============================================
+      WANT MORE THAN ONE PHOTO? Just copy the whole <figure>...</figure>
+      block above again, as many times as you want, and change the filename
+      each time. You can put them anywhere in the article, not just here.
+    ============================================= -->
+
     <p>Keep writing more paragraphs after the photo, same as before.</p>
+
+    <!-- ============================================
+      OPTIONAL: to add a VIDEO, upload it to YouTube first (you can set it
+      to "Unlisted" if you don't want it publicly searchable, only reachable
+      by link). Then grab the video's ID from its URL —
+      e.g. youtube.com/watch?v=ABC123 → the ID is "ABC123" —
+      and paste it into the src line below, replacing YOUR_VIDEO_ID.
+    ============================================= -->
+    <div style="position:relative; padding-bottom:56.25%; height:0; margin:2rem 0; border-radius:12px; overflow:hidden;">
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+    </div>
 
     <!-- ============================================
       OPTIONAL: to pull out a quote or a line you want to stand out, use this:
