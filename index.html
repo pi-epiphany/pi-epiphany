@@ -75,11 +75,19 @@
     box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,184,75,0.06);
   }
   .hero-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .hero-photo::after{
+  .hero-photo::after{ 
     content:''; position:absolute; inset:0;
     background: linear-gradient(180deg, transparent 55%, rgba(23,19,15,0.55) 100%);
   }
-  .mango-badge{
+  .hero-photo::before{
+  content:'pi-epiphany.com'; position:absolute; z-index:2;
+  bottom:10px; right:12px;
+  font-family:'Space Grotesk', sans-serif; font-size:0.72rem; font-weight:600;
+  color: rgba(255,255,255,0.6); letter-spacing:0.4px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.65);
+  pointer-events:none;
+  }
+  .mango-badge{ 
     position:absolute; bottom:-12px; right:-12px; z-index:2;
     width:38px; height:38px;
     background: var(--panel);
