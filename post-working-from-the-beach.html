@@ -48,10 +48,9 @@
 
   .featured-img{
     width:100%; aspect-ratio: 16/9; border-radius:14px; overflow:hidden;
-    margin-bottom: 2.5rem; border:1px dashed var(--panel-border);
-    display:flex; align-items:center; justify-content:center;
-    background: var(--panel); color: var(--text-dim); font-size:0.9rem; text-align:center; padding:1rem;
+    margin-bottom: 2.5rem;
   }
+  .featured-img img{ width:100%; height:100%; object-fit:cover; display:block; }
 
   article p{ color: var(--text-dim); font-size:1.05rem; margin-bottom: 1.3rem; max-width: 68ch; }
   article h2{
@@ -60,10 +59,9 @@
   }
 
   figure{ margin: 2rem 0; }
-  .figure-placeholder{
-    width:100%; aspect-ratio: 4/3; border-radius:12px; border:1px dashed var(--panel-border);
-    display:flex; align-items:center; justify-content:center;
-    background: var(--panel); color: var(--text-dim); font-size:0.9rem; text-align:center; padding:1rem;
+  figure img{
+    width:100%; aspect-ratio: 4/3; object-fit:cover;
+    border-radius:12px; display:block;
   }
   figcaption{ color: var(--text-dim); font-size:0.85rem; margin-top:0.6rem; font-style:italic; }
 
@@ -97,7 +95,7 @@
   <p style="color:var(--text-dim); font-size:1.1rem; margin-bottom:1.2rem;">One of the best islands in the Philippines.</p>
   <div class="post-meta">August 2026</div>
 
-  <div class="featured-img" style="background:none; border:none; padding:0;"><img src="images/beach-smile.jpg" alt="Working from the beach, smiling despite it all" style="width:100%; border-radius:14px; display:block;"></div>
+  <div class="featured-img"><img src="images/beach-smile.jpg" alt="Working from the beach, smiling despite it all"></div>
 
   <article>
     <p>I always pictured "working from the beach" as one of those things freelancers post about: laptop on the sand, zero stress in sight. Looks cool, right?</p>
