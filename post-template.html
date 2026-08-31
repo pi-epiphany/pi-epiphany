@@ -57,10 +57,11 @@
 
   /* Featured image at the top of the post */
   .featured-img{
-    width:100%; aspect-ratio: 16/9; border-radius:14px; overflow:hidden;
-    margin-bottom: 2.5rem;
+    width:100%; max-height:560px; border-radius:14px; overflow:hidden;
+    margin-bottom: 2.5rem; display:flex; align-items:center; justify-content:center;
+    background: var(--panel);
   }
-  .featured-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .featured-img img{ max-width:100%; max-height:560px; width:auto; height:auto; display:block; }
 
   article p{ color: var(--text-dim); font-size:1.05rem; margin-bottom: 1.3rem; max-width: 68ch; }
   article h2{
@@ -69,12 +70,15 @@
   }
 
   /* Photo dropped inside the writing, with an optional caption underneath.
-     All post photos display at this same consistent size (4:3 box) —
-     no matter what size or shape the original photo file is. */
-  figure{ margin: 2rem 0; }
+     Every post photo is capped at the same max size (never oversized), and
+     shows the WHOLE photo with nothing cropped off — no matter what size
+     or shape the original photo file is. */
+  figure{
+    margin: 2rem 0; width:100%; max-height:500px; border-radius:12px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; background: var(--panel);
+  }
   figure img{
-    width:100%; aspect-ratio: 4/3; object-fit:cover;
-    border-radius:12px; display:block;
+    max-width:100%; max-height:500px; width:auto; height:auto; display:block;
   }
   figcaption{ color: var(--text-dim); font-size:0.85rem; margin-top:0.6rem; font-style:italic; }
 
